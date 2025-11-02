@@ -1,3 +1,4 @@
-import infoController from './info-controller.js'
+import infoController from './info-controller.js';
+import airplaneController from './airplane-controllers.js';
 
-export default {infoController}
+export default {infoController, airplaneController}
