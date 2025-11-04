@@ -1,7 +1,14 @@
 import { PrismaClient } from "../../generated/prisma/index.js";
 import { logger } from "../config/index.js";
+// import sucessResponse from "../utils/common/index.js";
+
+// const SucessResponse = sucessResponse.SucessResponse;
+
+
 
 const prisma = new PrismaClient();
+
+// SucessResponse.message = "Create AIrplane sucessfully";
 
 class CrudRepository {
   constructor(model) {
@@ -12,7 +19,7 @@ class CrudRepository {
     try {
       return await prisma[this.model].create({ data });
     } catch (error) {
-    //   logger.error("Something went wrong in Crud Repo: Create");
+      logger.error("Something went wrong in Crud Repo: Create");
       throw error;
     }
   }

@@ -16,7 +16,7 @@ async function createAirplane(req, res) {
     return res.status(StatusCodes.CREATED).json({
       success: true,
       message: 'Successfully created an Airplane',
-      data: airplane, // ✅ fixed this line
+      data: airplane,
       error: {},
     });
   } catch (error) {
@@ -24,7 +24,7 @@ async function createAirplane(req, res) {
       success: false,
       message: 'Something went wrong while creating airplane',
       data: {},
-      error: error.message, // ✅ avoid sending entire error object
+      error: error.message, 
     });
   }
 }
