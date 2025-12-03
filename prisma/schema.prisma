@@ -25,7 +25,7 @@ model User {
 model Airplane {
   id          Int @id @default(autoincrement())
   modelNumber String
-  capacity    Int @default(200)
+  capacity    Int @default(200) 
   createdAt   DateTime  @default(now())
   updatedAt   DateTime? @default(now())
 }

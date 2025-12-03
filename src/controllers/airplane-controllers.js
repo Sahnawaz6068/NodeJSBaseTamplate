@@ -1,5 +1,9 @@
-import AirplaneService from '../services/index.js';
-import { StatusCodes } from 'http-status-codes';
+import AirplaneService from "../services/index.js";
+import { StatusCodes } from "http-status-codes";
+import reqResponses from "../utils/common/index.js";
+
+const errorResponse = reqResponses.ErrorResponse;
+const sucessResponse = reqResponses.SucessResponse;
 
 // API --> POST:/airplanes
 // req-body --> { modelNumber: 'AirBus-230', capacity:230 }
@@ -12,20 +16,15 @@ async function createAirplane(req, res) {
       modelNumber: req.body.modelNumber,
       capacity: req.body.capacity,
     });
-
-    return res.status(StatusCodes.CREATED).json({
-      success: true,
-      message: 'Successfully created an Airplane',
-      data: airplane,
-      error: {},
-    });
+    sucessResponse.data = airplane;
+    sucessResponse.message = "Successfully created an Airplane";
+    return res.status(StatusCodes.CREATED).json({ sucessResponse });
+    
   } catch (error) {
-    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      success: false,
-      message: 'Something went wrong while creating airplane',
-      data: {},
-      error: error.message, 
-    });
+    errorResponse.message = "Something went wrong while creating airplane";
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ errorResponse });
   }
 }
 

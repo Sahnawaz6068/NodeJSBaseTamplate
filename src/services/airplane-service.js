@@ -1,8 +1,8 @@
 
-import AirplaneService from "../repositories/index.js";
+import AirplaneRepo from "../repositories/index.js";
 
 
-const airplaneRepository = new AirplaneService.AirplaneRepository();
+const airplaneRepository = new AirplaneRepo.AirplaneRepository();
 
 async function createAirplane(data) {
   try {
