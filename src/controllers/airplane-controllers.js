@@ -11,7 +11,7 @@ const sucessResponse = reqResponses.SucessResponse;
 async function createAirplane(req, res) {
   console.log(req.body);
 
-  try {
+  try {//createAirplane service return the airplane
     const airplane = await AirplaneService.createAirplane({
       modelNumber: req.body.modelNumber,
       capacity: req.body.capacity,
