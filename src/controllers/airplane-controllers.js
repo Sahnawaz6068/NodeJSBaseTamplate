@@ -11,7 +11,8 @@ const sucessResponse = reqResponses.SucessResponse;
 async function createAirplane(req, res) {
   console.log(req.body);
 
-  try {//createAirplane service return the airplane
+  try {
+    //createAirplane service return the airplane
     const airplane = await AirplaneService.createAirplane({
       modelNumber: req.body.modelNumber,
       capacity: req.body.capacity,
@@ -19,7 +20,6 @@ async function createAirplane(req, res) {
     sucessResponse.data = airplane;
     sucessResponse.message = "Successfully created an Airplane";
     return res.status(StatusCodes.CREATED).json({ sucessResponse });
-    
   } catch (error) {
     errorResponse.message = "Something went wrong while creating airplane";
     return res
@@ -28,4 +28,16 @@ async function createAirplane(req, res) {
   }
 }
 
-export default { createAirplane };
+async function getAllAirplanes(req, res) {
+  try {
+    const airplanes = await AirplaneService.getAllAirplanes();
+    sucessResponse.data = airplanes;
+    return res.status(StatusCodes.OK).json(sucessResponse);
+  } catch (err) {
+    errorResponse.error=err;
+    return res.status(err.StatusCodes).json(errorResponse);
+                                   
+  }
+}
+
+export default { createAirplane, getAllAirplanes };

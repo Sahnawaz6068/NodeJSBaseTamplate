@@ -1,4 +1,5 @@
 
+import { StatusCodes } from "http-status-codes";
 import AirplaneRepo from "../repositories/index.js";
 
 
@@ -13,4 +14,13 @@ async function createAirplane(data) {
   }
 }
 
-export default { createAirplane };
+async function getAllAirplanes (){
+  try{
+    const airplanes = await airplaneRepository.readAll();
+    return airplanes;
+  }catch(error){
+    throw new Error("can not fetch data of all the airplanes",StatusCodes.INTERNAL_SERVER_ERROR)
+  }
+}
+
+export default { createAirplane, getAllAirplanes };
