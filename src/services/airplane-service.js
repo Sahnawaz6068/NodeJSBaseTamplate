@@ -23,4 +23,14 @@ async function getAllAirplanes (){
   }
 }
 
-export default { createAirplane, getAllAirplanes };
+async function getAirplane(id){
+  const airplaneId = parseInt(id);
+  try{
+    const airplane = await airplaneRepository.read(airplaneId);
+    return airplane;
+  }catch(error){
+    throw new Error("Some problem during fetching Airplane using Id",StatusCodes.INTERNAL_SERVER_ERROR)
+  }
+}
+
+export default { createAirplane, getAllAirplanes, getAirplane };

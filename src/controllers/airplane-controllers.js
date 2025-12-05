@@ -28,6 +28,7 @@ async function createAirplane(req, res) {
   }
 }
 
+// API --> GET:/airplanes
 async function getAllAirplanes(req, res) {
   try {
     const airplanes = await AirplaneService.getAllAirplanes();
@@ -35,9 +36,21 @@ async function getAllAirplanes(req, res) {
     return res.status(StatusCodes.OK).json(sucessResponse);
   } catch (err) {
     errorResponse.error=err;
-    return res.status(err.StatusCodes).json(errorResponse);
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(errorResponse);
                                    
   }
 }
 
-export default { createAirplane, getAllAirplanes };
+// API --> GET:/airplanes/:id
+async function getAirplaneById(req,res) {
+  try{
+    const airplane = await AirplaneService.getAirplane(req.params.id);
+    sucessResponse.data = airplane;
+    return res
+              .status(StatusCodes.OK).json(sucessResponse)
+  }catch(error){
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(errorResponse)
+  }
+}
+
+export default { createAirplane, getAllAirplanes, getAirplaneById };

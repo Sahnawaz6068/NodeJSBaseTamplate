@@ -4,10 +4,15 @@ import middleware from '../../middlewares/index.js';
 
 const router = express.Router();
 
-//api/v1/airplanes/post
+//post-->api/v1/airplanes/
 router.post('/',middleware.airplaneMiddleware,controller.airplaneController.createAirplane)
-//api/v1/airplanes/get
+
+//get-->api/v1/airplanes/
 router.get("/",controller.airplaneController.getAllAirplanes);
+
+//get-->api/v1/airplanes/:id
+router.get("/:id",controller.airplaneController.getAirplaneById);
+
 
 
 export default router;
