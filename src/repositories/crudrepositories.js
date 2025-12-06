@@ -39,24 +39,34 @@ class CrudRepository {
     return response;
   }
 
-  async update(id, data) {
+async update(id, data) {
+  try {
     const response = await prisma[this.model].update({
       where: { id },
       data,
     });
     return response;
+  } catch (error) {
+    if (error.code === 'P2025') {
+      throw new AppError("Not able to find the resource to update", StatusCodes.NOT_FOUND);
+    }
+    throw error;
   }
+}
 
   async delete(id) {
     try {
-        const response = await prisma[this.model].delete({ where: { id } });
-        return response;
-    } catch(error) {
-        // P2025 is the code for "Record to delete does not exist"
-        if(error.code === 'P2025') {
-            throw new AppError("Not able to find the resources", StatusCodes.NOT_FOUND);
-        }
-        throw error;
+      const response = await prisma[this.model].delete({ where: { id } });
+      return response;
+    } catch (error) {
+      // P2025 is the code for "Record to delete does not exist"
+      if (error.code === "P2025") {
+        throw new AppError(
+          "Not able to find the resources",
+          StatusCodes.NOT_FOUND
+        );
+      }
+      throw error;
     }
   }
 }

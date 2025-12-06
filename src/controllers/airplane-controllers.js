@@ -35,35 +35,52 @@ async function getAllAirplanes(req, res) {
     sucessResponse.data = airplanes;
     return res.status(StatusCodes.OK).json(sucessResponse);
   } catch (err) {
-    errorResponse.error=err;
+    errorResponse.error = err;
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(errorResponse);
-                                   
   }
 }
 
 // API --> GET:/airplanes/:id
-async function getAirplaneById(req,res) {
-  try{
+async function getAirplaneById(req, res) {
+  try {
     const airplane = await AirplaneService.getAirplane(req.params.id);
     sucessResponse.data = airplane;
-    return res
-              .status(StatusCodes.OK).json(sucessResponse)
-  }catch(error){
-    errorResponse.error=error;
-    return res.status(error.statusCode).json(errorResponse)
+    return res.status(StatusCodes.OK).json(sucessResponse);
+  } catch (error) {
+    errorResponse.error = error;
+    return res.status(error.statusCode).json(errorResponse);
   }
 }
 
 // API --> DELETE:/airplanes/:id
-async function deleteAirplaneById(req,res) {
-  try{
-    const response =await AirplaneService.deleteAirplane(req.params.id);
-    sucessResponse.data=response;
+async function deleteAirplaneById(req, res) {
+  try {
+    const response = await AirplaneService.deleteAirplane(req.params.id);
+    sucessResponse.data = response;
     return res.status(StatusCodes.OK).json(sucessResponse);
-  }catch(error){
-    errorResponse.error=error; 
-    return res.status(error.statusCode).json(errorResponse)
+  } catch (error) {
+    errorResponse.error = error;
+    return res.status(error.statusCode).json(errorResponse);
   }
 }
 
-export default { createAirplane, getAllAirplanes, getAirplaneById, deleteAirplaneById };
+// API --> PATCH:/airplanes/:id
+async function updateAirplane(req, res) {
+  try {
+    const response = await AirplaneService.updateAirplane(req.params.id, req.body);
+    
+    sucessResponse.data = response;
+    return res.status(StatusCodes.OK).json(sucessResponse);
+  } catch (error) {
+    errorResponse.error = error;
+    return res.status(error.statusCode || StatusCodes.INTERNAL_SERVER_ERROR).json(errorResponse);
+  }
+}
+
+export default {
+  createAirplane,
+  getAllAirplanes,
+  getAirplaneById,
+  deleteAirplaneById,
+  updateAirplane,
+};

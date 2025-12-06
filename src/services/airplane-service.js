@@ -61,4 +61,21 @@ async function deleteAirplane(id) {
   }
 }
 
-export default { createAirplane, getAllAirplanes, getAirplane, deleteAirplane };
+// api/v1/airplanes -PATCH
+async function updateAirplane(id, data) {
+  const airplaneId = parseInt(id);
+  try {
+    const response = await airplaneRepository.update(airplaneId, data);
+    return response;
+  } catch (error) {
+    if (error.statusCode === StatusCodes.NOT_FOUND) {
+      throw error;
+    }
+    throw new AppError(
+      "Cannot update the airplane",
+      StatusCodes.INTERNAL_SERVER_ERROR
+    );
+  }
+}
+
+export default { createAirplane, getAllAirplanes, getAirplane, deleteAirplane, updateAirplane };
