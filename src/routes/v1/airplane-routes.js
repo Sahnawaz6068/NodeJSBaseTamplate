@@ -13,6 +13,10 @@ router.get("/",controller.airplaneController.getAllAirplanes);
 //get-->api/v1/airplanes/:id
 router.get("/:id",controller.airplaneController.getAirplaneById);
 
+//delete-->api/v1/airplanes/:id
+router.delete("/:id",controller.airplaneController.deleteAirplaneById);
+
+
 
 
 export default router;

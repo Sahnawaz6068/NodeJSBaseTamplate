@@ -19,25 +19,28 @@ class CrudRepository {
   // }  //Because in servise we alredy handling the error handling try catch(err)
 
   async create(data) {
-    const response = prisma[this.model].create({ data });
+    const response = await prisma[this.model].create({ data });
     return response;
   }
 
   async read(id) {
-    const response =await prisma[this.model].findUnique({ where: { id } });
-    if(!response){
-      throw new AppError("Not able to find the resources",StatusCodes.NOT_FOUND)
+    const response = await prisma[this.model].findUnique({ where: { id } });
+    if (!response) {
+      throw new AppError(
+        "Not able to find the resources",
+        StatusCodes.NOT_FOUND
+      );
     }
     return response;
   }
 
   async readAll() {
-    const response = prisma[this.model].findMany();
+    const response = await prisma[this.model].findMany();
     return response;
   }
 
   async update(id, data) {
-    const response = prisma[this.model].update({
+    const response = await prisma[this.model].update({
       where: { id },
       data,
     });
@@ -45,8 +48,16 @@ class CrudRepository {
   }
 
   async delete(id) {
-    const response = prisma[this.model].delete({ where: { id } });
-    return response;
+    try {
+        const response = await prisma[this.model].delete({ where: { id } });
+        return response;
+    } catch(error) {
+        // P2025 is the code for "Record to delete does not exist"
+        if(error.code === 'P2025') {
+            throw new AppError("Not able to find the resources", StatusCodes.NOT_FOUND);
+        }
+        throw error;
+    }
   }
 }
 

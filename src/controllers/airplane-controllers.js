@@ -54,4 +54,16 @@ async function getAirplaneById(req,res) {
   }
 }
 
-export default { createAirplane, getAllAirplanes, getAirplaneById };
+// API --> DELETE:/airplanes/:id
+async function deleteAirplaneById(req,res) {
+  try{
+    const response =await AirplaneService.deleteAirplane(req.params.id);
+    sucessResponse.data=response;
+    return res.status(StatusCodes.OK).json(sucessResponse);
+  }catch(error){
+    errorResponse.error=error; 
+    return res.status(error.statusCode).json(errorResponse)
+  }
+}
+
+export default { createAirplane, getAllAirplanes, getAirplaneById, deleteAirplaneById };
