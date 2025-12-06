@@ -49,7 +49,8 @@ async function getAirplaneById(req,res) {
     return res
               .status(StatusCodes.OK).json(sucessResponse)
   }catch(error){
-    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(errorResponse)
+    errorResponse.error=error;
+    return res.status(error.statusCode).json(errorResponse)
   }
 }
 

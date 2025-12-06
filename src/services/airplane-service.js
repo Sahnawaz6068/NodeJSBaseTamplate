@@ -1,6 +1,7 @@
 
 import { StatusCodes } from "http-status-codes";
 import AirplaneRepo from "../repositories/index.js";
+import AppError from "../utils/errors/app-error.js";
 
 
 const airplaneRepository = new AirplaneRepo.AirplaneRepository();
@@ -29,6 +30,9 @@ async function getAirplane(id){
     const airplane = await airplaneRepository.read(airplaneId);
     return airplane;
   }catch(error){
+    if(error.statusCode===StatusCodes.NOT_FOUND){
+      throw new AppError("Airplane you requested is not present", error.statusCode);
+    }
     throw new Error("Some problem during fetching Airplane using Id",StatusCodes.INTERNAL_SERVER_ERROR)
   }
 }

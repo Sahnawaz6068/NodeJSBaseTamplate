@@ -1,5 +1,6 @@
+import { StatusCodes } from "http-status-codes";
 import { PrismaClient } from "../../generated/prisma/index.js";
-import { logger } from "../config/index.js";
+import AppError from "../utils/errors/app-error.js";
 
 const prisma = new PrismaClient();
 
@@ -23,7 +24,10 @@ class CrudRepository {
   }
 
   async read(id) {
-    const response = prisma[this.model].findUnique({ where: { id } });
+    const response =await prisma[this.model].findUnique({ where: { id } });
+    if(!response){
+      throw new AppError("Not able to find the resources",StatusCodes.NOT_FOUND)
+    }
     return response;
   }
 
