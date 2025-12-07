@@ -8,8 +8,13 @@ async function createCity(data) {
   try {
     const city = await cityRepository.create(data);
     return city;
+
   } catch (error) {
-    throw error;
+   if(error.code==="P2002"){
+        throw new AppError ("Duplicate Entry",StatusCodes.CONFLICT)
+    }
+    
+    throw new AppError("Internal Server Error", StatusCodes.INTERNAL_SERVER_ERROR);
   }
 }
 

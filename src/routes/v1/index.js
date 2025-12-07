@@ -11,4 +11,3 @@ router.use('/cities',cityRoute)
 router.get('/info',controller.infoController);
 
 export default router;
-  
