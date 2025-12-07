@@ -23,6 +23,11 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  * 
  */
 export type Airplane = $Result.DefaultSelection<Prisma.$AirplanePayload>
+/**
+ * Model City
+ * 
+ */
+export type City = $Result.DefaultSelection<Prisma.$CityPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -166,6 +171,16 @@ export class PrismaClient<
     * ```
     */
   get airplane(): Prisma.AirplaneDelegate<ExtArgs>;
+
+  /**
+   * `prisma.city`: Exposes CRUD operations for the **City** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Cities
+    * const cities = await prisma.city.findMany()
+    * ```
+    */
+  get city(): Prisma.CityDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -608,7 +623,8 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
-    Airplane: 'Airplane'
+    Airplane: 'Airplane',
+    City: 'City'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -624,7 +640,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "airplane"
+      modelProps: "user" | "airplane" | "city"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -765,6 +781,76 @@ export namespace Prisma {
           count: {
             args: Prisma.AirplaneCountArgs<ExtArgs>
             result: $Utils.Optional<AirplaneCountAggregateOutputType> | number
+          }
+        }
+      }
+      City: {
+        payload: Prisma.$CityPayload<ExtArgs>
+        fields: Prisma.CityFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CityFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CityPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CityFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CityPayload>
+          }
+          findFirst: {
+            args: Prisma.CityFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CityPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CityFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CityPayload>
+          }
+          findMany: {
+            args: Prisma.CityFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CityPayload>[]
+          }
+          create: {
+            args: Prisma.CityCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CityPayload>
+          }
+          createMany: {
+            args: Prisma.CityCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CityCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CityPayload>[]
+          }
+          delete: {
+            args: Prisma.CityDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CityPayload>
+          }
+          update: {
+            args: Prisma.CityUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CityPayload>
+          }
+          deleteMany: {
+            args: Prisma.CityDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CityUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.CityUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CityPayload>
+          }
+          aggregate: {
+            args: Prisma.CityAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCity>
+          }
+          groupBy: {
+            args: Prisma.CityGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CityGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CityCountArgs<ExtArgs>
+            result: $Utils.Optional<CityCountAggregateOutputType> | number
           }
         }
       }
@@ -2758,6 +2844,882 @@ export namespace Prisma {
 
 
   /**
+   * Model City
+   */
+
+  export type AggregateCity = {
+    _count: CityCountAggregateOutputType | null
+    _avg: CityAvgAggregateOutputType | null
+    _sum: CitySumAggregateOutputType | null
+    _min: CityMinAggregateOutputType | null
+    _max: CityMaxAggregateOutputType | null
+  }
+
+  export type CityAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type CitySumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type CityMinAggregateOutputType = {
+    id: number | null
+    name: string | null
+  }
+
+  export type CityMaxAggregateOutputType = {
+    id: number | null
+    name: string | null
+  }
+
+  export type CityCountAggregateOutputType = {
+    id: number
+    name: number
+    _all: number
+  }
+
+
+  export type CityAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type CitySumAggregateInputType = {
+    id?: true
+  }
+
+  export type CityMinAggregateInputType = {
+    id?: true
+    name?: true
+  }
+
+  export type CityMaxAggregateInputType = {
+    id?: true
+    name?: true
+  }
+
+  export type CityCountAggregateInputType = {
+    id?: true
+    name?: true
+    _all?: true
+  }
+
+  export type CityAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which City to aggregate.
+     */
+    where?: CityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Cities to fetch.
+     */
+    orderBy?: CityOrderByWithRelationInput | CityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Cities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Cities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Cities
+    **/
+    _count?: true | CityCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: CityAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CitySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CityMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CityMaxAggregateInputType
+  }
+
+  export type GetCityAggregateType<T extends CityAggregateArgs> = {
+        [P in keyof T & keyof AggregateCity]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCity[P]>
+      : GetScalarType<T[P], AggregateCity[P]>
+  }
+
+
+
+
+  export type CityGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CityWhereInput
+    orderBy?: CityOrderByWithAggregationInput | CityOrderByWithAggregationInput[]
+    by: CityScalarFieldEnum[] | CityScalarFieldEnum
+    having?: CityScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CityCountAggregateInputType | true
+    _avg?: CityAvgAggregateInputType
+    _sum?: CitySumAggregateInputType
+    _min?: CityMinAggregateInputType
+    _max?: CityMaxAggregateInputType
+  }
+
+  export type CityGroupByOutputType = {
+    id: number
+    name: string
+    _count: CityCountAggregateOutputType | null
+    _avg: CityAvgAggregateOutputType | null
+    _sum: CitySumAggregateOutputType | null
+    _min: CityMinAggregateOutputType | null
+    _max: CityMaxAggregateOutputType | null
+  }
+
+  type GetCityGroupByPayload<T extends CityGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CityGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CityGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CityGroupByOutputType[P]>
+            : GetScalarType<T[P], CityGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CitySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+  }, ExtArgs["result"]["city"]>
+
+  export type CitySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+  }, ExtArgs["result"]["city"]>
+
+  export type CitySelectScalar = {
+    id?: boolean
+    name?: boolean
+  }
+
+
+  export type $CityPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "City"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      name: string
+    }, ExtArgs["result"]["city"]>
+    composites: {}
+  }
+
+  type CityGetPayload<S extends boolean | null | undefined | CityDefaultArgs> = $Result.GetResult<Prisma.$CityPayload, S>
+
+  type CityCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<CityFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: CityCountAggregateInputType | true
+    }
+
+  export interface CityDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['City'], meta: { name: 'City' } }
+    /**
+     * Find zero or one City that matches the filter.
+     * @param {CityFindUniqueArgs} args - Arguments to find a City
+     * @example
+     * // Get one City
+     * const city = await prisma.city.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CityFindUniqueArgs>(args: SelectSubset<T, CityFindUniqueArgs<ExtArgs>>): Prisma__CityClient<$Result.GetResult<Prisma.$CityPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one City that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {CityFindUniqueOrThrowArgs} args - Arguments to find a City
+     * @example
+     * // Get one City
+     * const city = await prisma.city.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CityFindUniqueOrThrowArgs>(args: SelectSubset<T, CityFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CityClient<$Result.GetResult<Prisma.$CityPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first City that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CityFindFirstArgs} args - Arguments to find a City
+     * @example
+     * // Get one City
+     * const city = await prisma.city.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CityFindFirstArgs>(args?: SelectSubset<T, CityFindFirstArgs<ExtArgs>>): Prisma__CityClient<$Result.GetResult<Prisma.$CityPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first City that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CityFindFirstOrThrowArgs} args - Arguments to find a City
+     * @example
+     * // Get one City
+     * const city = await prisma.city.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CityFindFirstOrThrowArgs>(args?: SelectSubset<T, CityFindFirstOrThrowArgs<ExtArgs>>): Prisma__CityClient<$Result.GetResult<Prisma.$CityPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more Cities that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CityFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Cities
+     * const cities = await prisma.city.findMany()
+     * 
+     * // Get first 10 Cities
+     * const cities = await prisma.city.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const cityWithIdOnly = await prisma.city.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CityFindManyArgs>(args?: SelectSubset<T, CityFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CityPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a City.
+     * @param {CityCreateArgs} args - Arguments to create a City.
+     * @example
+     * // Create one City
+     * const City = await prisma.city.create({
+     *   data: {
+     *     // ... data to create a City
+     *   }
+     * })
+     * 
+     */
+    create<T extends CityCreateArgs>(args: SelectSubset<T, CityCreateArgs<ExtArgs>>): Prisma__CityClient<$Result.GetResult<Prisma.$CityPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many Cities.
+     * @param {CityCreateManyArgs} args - Arguments to create many Cities.
+     * @example
+     * // Create many Cities
+     * const city = await prisma.city.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CityCreateManyArgs>(args?: SelectSubset<T, CityCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Cities and returns the data saved in the database.
+     * @param {CityCreateManyAndReturnArgs} args - Arguments to create many Cities.
+     * @example
+     * // Create many Cities
+     * const city = await prisma.city.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Cities and only return the `id`
+     * const cityWithIdOnly = await prisma.city.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CityCreateManyAndReturnArgs>(args?: SelectSubset<T, CityCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CityPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a City.
+     * @param {CityDeleteArgs} args - Arguments to delete one City.
+     * @example
+     * // Delete one City
+     * const City = await prisma.city.delete({
+     *   where: {
+     *     // ... filter to delete one City
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CityDeleteArgs>(args: SelectSubset<T, CityDeleteArgs<ExtArgs>>): Prisma__CityClient<$Result.GetResult<Prisma.$CityPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one City.
+     * @param {CityUpdateArgs} args - Arguments to update one City.
+     * @example
+     * // Update one City
+     * const city = await prisma.city.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CityUpdateArgs>(args: SelectSubset<T, CityUpdateArgs<ExtArgs>>): Prisma__CityClient<$Result.GetResult<Prisma.$CityPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more Cities.
+     * @param {CityDeleteManyArgs} args - Arguments to filter Cities to delete.
+     * @example
+     * // Delete a few Cities
+     * const { count } = await prisma.city.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CityDeleteManyArgs>(args?: SelectSubset<T, CityDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Cities.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CityUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Cities
+     * const city = await prisma.city.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CityUpdateManyArgs>(args: SelectSubset<T, CityUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one City.
+     * @param {CityUpsertArgs} args - Arguments to update or create a City.
+     * @example
+     * // Update or create a City
+     * const city = await prisma.city.upsert({
+     *   create: {
+     *     // ... data to create a City
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the City we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CityUpsertArgs>(args: SelectSubset<T, CityUpsertArgs<ExtArgs>>): Prisma__CityClient<$Result.GetResult<Prisma.$CityPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of Cities.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CityCountArgs} args - Arguments to filter Cities to count.
+     * @example
+     * // Count the number of Cities
+     * const count = await prisma.city.count({
+     *   where: {
+     *     // ... the filter for the Cities we want to count
+     *   }
+     * })
+    **/
+    count<T extends CityCountArgs>(
+      args?: Subset<T, CityCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CityCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a City.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CityAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CityAggregateArgs>(args: Subset<T, CityAggregateArgs>): Prisma.PrismaPromise<GetCityAggregateType<T>>
+
+    /**
+     * Group by City.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CityGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CityGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CityGroupByArgs['orderBy'] }
+        : { orderBy?: CityGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CityGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCityGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the City model
+   */
+  readonly fields: CityFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for City.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CityClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the City model
+   */ 
+  interface CityFieldRefs {
+    readonly id: FieldRef<"City", 'Int'>
+    readonly name: FieldRef<"City", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * City findUnique
+   */
+  export type CityFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the City
+     */
+    select?: CitySelect<ExtArgs> | null
+    /**
+     * Filter, which City to fetch.
+     */
+    where: CityWhereUniqueInput
+  }
+
+  /**
+   * City findUniqueOrThrow
+   */
+  export type CityFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the City
+     */
+    select?: CitySelect<ExtArgs> | null
+    /**
+     * Filter, which City to fetch.
+     */
+    where: CityWhereUniqueInput
+  }
+
+  /**
+   * City findFirst
+   */
+  export type CityFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the City
+     */
+    select?: CitySelect<ExtArgs> | null
+    /**
+     * Filter, which City to fetch.
+     */
+    where?: CityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Cities to fetch.
+     */
+    orderBy?: CityOrderByWithRelationInput | CityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Cities.
+     */
+    cursor?: CityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Cities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Cities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Cities.
+     */
+    distinct?: CityScalarFieldEnum | CityScalarFieldEnum[]
+  }
+
+  /**
+   * City findFirstOrThrow
+   */
+  export type CityFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the City
+     */
+    select?: CitySelect<ExtArgs> | null
+    /**
+     * Filter, which City to fetch.
+     */
+    where?: CityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Cities to fetch.
+     */
+    orderBy?: CityOrderByWithRelationInput | CityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Cities.
+     */
+    cursor?: CityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Cities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Cities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Cities.
+     */
+    distinct?: CityScalarFieldEnum | CityScalarFieldEnum[]
+  }
+
+  /**
+   * City findMany
+   */
+  export type CityFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the City
+     */
+    select?: CitySelect<ExtArgs> | null
+    /**
+     * Filter, which Cities to fetch.
+     */
+    where?: CityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Cities to fetch.
+     */
+    orderBy?: CityOrderByWithRelationInput | CityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Cities.
+     */
+    cursor?: CityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Cities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Cities.
+     */
+    skip?: number
+    distinct?: CityScalarFieldEnum | CityScalarFieldEnum[]
+  }
+
+  /**
+   * City create
+   */
+  export type CityCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the City
+     */
+    select?: CitySelect<ExtArgs> | null
+    /**
+     * The data needed to create a City.
+     */
+    data: XOR<CityCreateInput, CityUncheckedCreateInput>
+  }
+
+  /**
+   * City createMany
+   */
+  export type CityCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Cities.
+     */
+    data: CityCreateManyInput | CityCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * City createManyAndReturn
+   */
+  export type CityCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the City
+     */
+    select?: CitySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many Cities.
+     */
+    data: CityCreateManyInput | CityCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * City update
+   */
+  export type CityUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the City
+     */
+    select?: CitySelect<ExtArgs> | null
+    /**
+     * The data needed to update a City.
+     */
+    data: XOR<CityUpdateInput, CityUncheckedUpdateInput>
+    /**
+     * Choose, which City to update.
+     */
+    where: CityWhereUniqueInput
+  }
+
+  /**
+   * City updateMany
+   */
+  export type CityUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Cities.
+     */
+    data: XOR<CityUpdateManyMutationInput, CityUncheckedUpdateManyInput>
+    /**
+     * Filter which Cities to update
+     */
+    where?: CityWhereInput
+  }
+
+  /**
+   * City upsert
+   */
+  export type CityUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the City
+     */
+    select?: CitySelect<ExtArgs> | null
+    /**
+     * The filter to search for the City to update in case it exists.
+     */
+    where: CityWhereUniqueInput
+    /**
+     * In case the City found by the `where` argument doesn't exist, create a new City with this data.
+     */
+    create: XOR<CityCreateInput, CityUncheckedCreateInput>
+    /**
+     * In case the City was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CityUpdateInput, CityUncheckedUpdateInput>
+  }
+
+  /**
+   * City delete
+   */
+  export type CityDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the City
+     */
+    select?: CitySelect<ExtArgs> | null
+    /**
+     * Filter which City to delete.
+     */
+    where: CityWhereUniqueInput
+  }
+
+  /**
+   * City deleteMany
+   */
+  export type CityDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Cities to delete
+     */
+    where?: CityWhereInput
+  }
+
+  /**
+   * City without action
+   */
+  export type CityDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the City
+     */
+    select?: CitySelect<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -2791,6 +3753,14 @@ export namespace Prisma {
   };
 
   export type AirplaneScalarFieldEnum = (typeof AirplaneScalarFieldEnum)[keyof typeof AirplaneScalarFieldEnum]
+
+
+  export const CityScalarFieldEnum: {
+    id: 'id',
+    name: 'name'
+  };
+
+  export type CityScalarFieldEnum = (typeof CityScalarFieldEnum)[keyof typeof CityScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -2989,6 +3959,45 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Airplane"> | Date | string
   }
 
+  export type CityWhereInput = {
+    AND?: CityWhereInput | CityWhereInput[]
+    OR?: CityWhereInput[]
+    NOT?: CityWhereInput | CityWhereInput[]
+    id?: IntFilter<"City"> | number
+    name?: StringFilter<"City"> | string
+  }
+
+  export type CityOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type CityWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    name?: string
+    AND?: CityWhereInput | CityWhereInput[]
+    OR?: CityWhereInput[]
+    NOT?: CityWhereInput | CityWhereInput[]
+  }, "id" | "name">
+
+  export type CityOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    _count?: CityCountOrderByAggregateInput
+    _avg?: CityAvgOrderByAggregateInput
+    _max?: CityMaxOrderByAggregateInput
+    _min?: CityMinOrderByAggregateInput
+    _sum?: CitySumOrderByAggregateInput
+  }
+
+  export type CityScalarWhereWithAggregatesInput = {
+    AND?: CityScalarWhereWithAggregatesInput | CityScalarWhereWithAggregatesInput[]
+    OR?: CityScalarWhereWithAggregatesInput[]
+    NOT?: CityScalarWhereWithAggregatesInput | CityScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"City"> | number
+    name?: StringWithAggregatesFilter<"City"> | string
+  }
+
   export type UserCreateInput = {
     userName: string
     email: string
@@ -3093,6 +4102,38 @@ export namespace Prisma {
     capacity?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CityCreateInput = {
+    name: string
+  }
+
+  export type CityUncheckedCreateInput = {
+    id?: number
+    name: string
+  }
+
+  export type CityUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type CityUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type CityCreateManyInput = {
+    id?: number
+    name: string
+  }
+
+  export type CityUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type CityUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -3284,6 +4325,29 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type CityCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type CityAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type CityMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type CityMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type CitySumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -3453,6 +4517,10 @@ export namespace Prisma {
      * @deprecated Use AirplaneDefaultArgs instead
      */
     export type AirplaneArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = AirplaneDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use CityDefaultArgs instead
+     */
+    export type CityArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = CityDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

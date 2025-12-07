@@ -138,6 +138,11 @@ exports.Prisma.AirplaneScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.CityScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -156,7 +161,8 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Airplane: 'Airplane'
+  Airplane: 'Airplane',
+  City: 'City'
 };
 
 /**

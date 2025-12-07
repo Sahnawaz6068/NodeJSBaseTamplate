@@ -1,13 +1,11 @@
 generator client {
   provider   = "prisma-client-js"
   output     = "../generated/prisma"
-  // This line FIXES your specific crash by forcing the standard engine:
   engineType = "binary"
 }
 
 datasource db {
   provider = "postgresql"
-  // Put the URL back here now that the config file is gone:
   url      = env("DATABASE_URL")
 }
 
@@ -25,4 +23,9 @@ model Airplane {
   capacity    Int      @default(200)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+model City {
+  id   Int    @id @default(autoincrement())
+  name String @unique
 }

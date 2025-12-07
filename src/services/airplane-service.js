@@ -1,8 +1,8 @@
 import { StatusCodes } from "http-status-codes";
-import AirplaneRepo from "../repositories/index.js";
+import repositories from "../repositories/index.js";
 import AppError from "../utils/errors/app-error.js";
 
-const airplaneRepository = new AirplaneRepo.AirplaneRepository();
+const airplaneRepository = new repositories.AirplaneRepository();
 
 async function createAirplane(data) {
   try {
