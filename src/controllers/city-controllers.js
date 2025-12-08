@@ -14,8 +14,7 @@ async function createCity(req, res) {
     sucessResponse.data = city;
     sucessResponse.message = "Successfully created a City";
     return res.status(StatusCodes.CREATED).json({ sucessResponse });
-  } 
-  catch (error) {
+  } catch (error) {
     console.log(error);
     const status = error.statusCode || StatusCodes.INTERNAL_SERVER_ERROR;
 
@@ -25,7 +24,25 @@ async function createCity(req, res) {
     return res.status(status).json(errorResponse);
   }
 }
+//API --> GET:/city/:id
+async function getCityById(req, res) {
+  try {
+    const response = await cityService.readCityById(req.params.id);
+    sucessResponse.data = response;
+    sucessResponse.message = `this is your city for id ${req.params.id}`;
+    return res.status(StatusCodes.OK).json(sucessResponse);
+  } 
+  catch (error) {
+    const status = error.statusCode;
+    errorResponse.message = error.message;
+    errorResponse.statusCode = status;
+    errorResponse.error = error;
+
+    return res.status(status).json(errorResponse);
+  }
+}
 
 export default {
   createCity,
+  getCityById,
 };

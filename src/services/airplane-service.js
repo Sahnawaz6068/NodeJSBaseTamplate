@@ -37,7 +37,7 @@ async function getAirplane(id) {
         error.statusCode
       );
     }
-    throw new Error(
+    throw new AppError(
       "Some problem during fetching Airplane using Id",
       StatusCodes.INTERNAL_SERVER_ERROR
     );
