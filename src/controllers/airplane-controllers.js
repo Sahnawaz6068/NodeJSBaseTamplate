@@ -60,6 +60,7 @@ async function deleteAirplaneById(req, res) {
     return res.status(StatusCodes.OK).json(sucessResponse);
   } catch (error) {
     errorResponse.error = error;
+    errorResponse.message = error.message;
     return res.status(error.statusCode).json(errorResponse);
   }
 }

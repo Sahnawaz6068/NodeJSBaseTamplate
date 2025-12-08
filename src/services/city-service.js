@@ -28,8 +28,7 @@ async function readCityById(id) {
   try {
     const response = await cityRepository.read(cityId);
     return response;
-  } 
-  catch (error) {
+  } catch (error) {
     if (error.statusCode === StatusCodes.NOT_FOUND) {
       throw new AppError(
         `THE city with this ${cityId} is not found`,
@@ -43,18 +42,35 @@ async function readCityById(id) {
   }
 }
 
-async function readAllCity(){
-  try{
+//read all city
+async function readAllCity() {
+  try {
     const response = await cityRepository.readAll();
-    return response ;
+    return response;
+  } catch (error) {
+    throw new AppError(error.message, StatusCodes.INTERNAL_SERVER_ERROR);
   }
-  catch(error){
-    throw new AppError(error.message,StatusCodes.INTERNAL_SERVER_ERROR)
+}
+
+//delete city by id
+async function deleteCityById(id) {
+  try {
+    const Id = parseInt(id);
+    const response = await cityRepository.delete(Id);
+
+    return response;
+  } catch (error) {
+    
+    throw new AppError(
+      error.message,
+      StatusCodes.INTERNAL_SERVER_ERROR
+    );
   }
 }
 
 export default {
   createCity,
   readCityById,
-  readAllCity
+  readAllCity,
+  deleteCityById
 };

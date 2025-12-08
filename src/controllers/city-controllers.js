@@ -18,7 +18,7 @@ async function createCity(req, res) {
     const status = error.statusCode || StatusCodes.INTERNAL_SERVER_ERROR;
     errorResponse.message = error.message;
     errorResponse.error = error;
-    error.statusCode =status;
+    error.statusCode = status;
 
     return res.status(status).json(errorResponse);
   }
@@ -30,8 +30,7 @@ async function getCityById(req, res) {
     sucessResponse.data = response;
     sucessResponse.message = `this is your city for id ${req.params.id}`;
     return res.status(StatusCodes.OK).json(sucessResponse);
-  } 
-  catch (error) {
+  } catch (error) {
     const status = error.statusCode;
     errorResponse.message = error.message;
     errorResponse.statusCode = status;
@@ -41,18 +40,35 @@ async function getCityById(req, res) {
   }
 }
 //API -->GET:/city/:id
-async function getAllCity(req,res){
-  try{
+async function getAllCity(req, res) {
+  try {
     const response = await cityService.readAllCity();
-    sucessResponse.message='All city list is here';
+    sucessResponse.message = "All city list is here";
     sucessResponse.data = response;
 
-    return res.status(StatusCodes.OK).json({sucessResponse})
-  }catch(error){
+    return res.status(StatusCodes.OK).json({ sucessResponse });
+  } catch (error) {
     const status = error.statusCode;
-    errorResponse.data =error;
+    errorResponse.data = error;
     errorResponse.statusCode = status;
+    errorResponse.message = error.message;
+
+    return res.status(status).json(errorResponse);
+  }
+}
+//API -->DELETE:/city/:id
+async function deleteCityById(req, res) {
+  try {
+    const response = await cityService.deleteCityById(req.params.id);
+    sucessResponse.message =`The city with id ${req.params.id} is deleted.`
+    sucessResponse.data = response;
+
+
+    return res.status(StatusCodes.OK).json(sucessResponse);
+  } catch (error) {
+    const status=error.statusCode;
     errorResponse.message =error.message;
+    errorResponse.statusCode =error.statusCode;
 
     return res.status(status).json(errorResponse);
   }
@@ -61,5 +77,6 @@ async function getAllCity(req,res){
 export default {
   createCity,
   getCityById,
-  getAllCity
+  getAllCity,
+  deleteCityById
 };

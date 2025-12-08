@@ -50,12 +50,8 @@ async function deleteAirplane(id) {
     const response = await airplaneRepository.delete(airplaneId);
     return response;
   } catch (error) {
-    if (error.statusCode === StatusCodes.NOT_FOUND) {
-       throw error; 
-    }
-
     throw new AppError(
-      "Cannot delete the airplane",
+      error.message,
       StatusCodes.INTERNAL_SERVER_ERROR
     );
   }

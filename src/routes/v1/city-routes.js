@@ -4,11 +4,13 @@ import middlewares from "../../middlewares/index.js";
 
 const router = express.Router();
 
-//post-->api/v1/airplanes/
+//post-->api/v1/cities/
 router.post("/", controller.cityControllers.createCity);
-//GET -->api/v1/airplanes/:id
+//GET -->api/v1/cities/:id
 router.get("/:id", controller.cityControllers.getCityById);
-//GET -->api/v1/airplanes
+//GET -->api/v1/cities
 router.get("/", controller.cityControllers.getAllCity);
+//GET -->api/v1/cities/:id
+router.delete('/:id', controller.cityControllers.deleteCityById)
 
 export default router;
