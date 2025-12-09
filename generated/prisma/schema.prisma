@@ -37,7 +37,7 @@ model Airport {
   code    String  @unique
   address String? // removed unique unless needed
   cityId  Int
-  city    City    @relation(fields: [cityId], references: [id])
+  city    City    @relation(fields: [cityId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@index([cityId])
 }
