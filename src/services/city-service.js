@@ -68,9 +68,24 @@ async function deleteCityById(id) {
   }
 }
 
+//update a city(id,data)
+async function updateCity(id,data) {
+  const cityId = parseInt(id);
+  try{
+    const response = await cityRepository.update(cityId,data);
+    return response;
+  }catch(error){
+    if(error.statusCode!==StatusCodes.NOT_FOUND){
+      throw new AppError(error.message,StatusCodes.NOT_FOUND)
+    }
+      throw new AppError("Something gone wrong with server",StatusCodes.INTERNAL_SERVER_ERROR);
+  }
+}
+
 export default {
   createCity,
   readCityById,
   readAllCity,
-  deleteCityById
+  deleteCityById,
+  updateCity
 };

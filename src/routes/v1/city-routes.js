@@ -11,6 +11,8 @@ router.get("/:id", controller.cityControllers.getCityById);
 //GET -->api/v1/cities
 router.get("/", controller.cityControllers.getAllCity);
 //GET -->api/v1/cities/:id
-router.delete('/:id', controller.cityControllers.deleteCityById)
+router.delete('/:id', controller.cityControllers.deleteCityById);
+//PATCH -->api/v1/cities/:id
+router.patch('/:id', controller.cityControllers.updateCity);
 
 export default router;

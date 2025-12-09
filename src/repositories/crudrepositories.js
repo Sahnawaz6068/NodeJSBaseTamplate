@@ -40,6 +40,7 @@ class CrudRepository {
   }
 
 async update(id, data) {
+  console.log(id)
   try {
     const response = await prisma[this.model].update({
       where: { id },

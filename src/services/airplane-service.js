@@ -60,6 +60,7 @@ async function deleteAirplane(id) {
 // api/v1/airplanes -PATCH
 async function updateAirplane(id, data) {
   const airplaneId = parseInt(id);
+  console.log(airplaneId)
   try {
     const response = await airplaneRepository.update(airplaneId, data);
     return response;
@@ -75,3 +76,4 @@ async function updateAirplane(id, data) {
 }
 
 export default { createAirplane, getAllAirplanes, getAirplane, deleteAirplane, updateAirplane };
+ 

@@ -73,10 +73,30 @@ async function deleteCityById(req, res) {
     return res.status(status).json(errorResponse);
   }
 }
+//API-->PATCH:/cities/:id
+async function updateCity(req,res) {
+  const cityId = req.params.id;
+  try{
+    const response = await cityService.updateCity(cityId,req.body);
+
+    sucessResponse.data = response;
+    return res.status(StatusCodes.OK).json(sucessResponse)
+  }
+  catch(error){
+    const status = error.statusCode;
+    const errRes = { ...errorResponse };
+    errRes.error = error;
+    errRes.message = error.message;
+    errRes.statusCode=error.statusCode;
+
+    return res.status(status).json(errRes)
+  }
+}
 
 export default {
   createCity,
   getCityById,
   getAllCity,
-  deleteCityById
+  deleteCityById,
+  updateCity
 };
