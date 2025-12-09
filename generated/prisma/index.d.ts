@@ -28,6 +28,11 @@ export type Airplane = $Result.DefaultSelection<Prisma.$AirplanePayload>
  * 
  */
 export type City = $Result.DefaultSelection<Prisma.$CityPayload>
+/**
+ * Model Airport
+ * 
+ */
+export type Airport = $Result.DefaultSelection<Prisma.$AirportPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -181,6 +186,16 @@ export class PrismaClient<
     * ```
     */
   get city(): Prisma.CityDelegate<ExtArgs>;
+
+  /**
+   * `prisma.airport`: Exposes CRUD operations for the **Airport** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Airports
+    * const airports = await prisma.airport.findMany()
+    * ```
+    */
+  get airport(): Prisma.AirportDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -624,7 +639,8 @@ export namespace Prisma {
   export const ModelName: {
     User: 'User',
     Airplane: 'Airplane',
-    City: 'City'
+    City: 'City',
+    Airport: 'Airport'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -640,7 +656,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "airplane" | "city"
+      modelProps: "user" | "airplane" | "city" | "airport"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -854,6 +870,76 @@ export namespace Prisma {
           }
         }
       }
+      Airport: {
+        payload: Prisma.$AirportPayload<ExtArgs>
+        fields: Prisma.AirportFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AirportFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AirportPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AirportFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AirportPayload>
+          }
+          findFirst: {
+            args: Prisma.AirportFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AirportPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AirportFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AirportPayload>
+          }
+          findMany: {
+            args: Prisma.AirportFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AirportPayload>[]
+          }
+          create: {
+            args: Prisma.AirportCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AirportPayload>
+          }
+          createMany: {
+            args: Prisma.AirportCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AirportCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AirportPayload>[]
+          }
+          delete: {
+            args: Prisma.AirportDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AirportPayload>
+          }
+          update: {
+            args: Prisma.AirportUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AirportPayload>
+          }
+          deleteMany: {
+            args: Prisma.AirportDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AirportUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.AirportUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AirportPayload>
+          }
+          aggregate: {
+            args: Prisma.AirportAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAirport>
+          }
+          groupBy: {
+            args: Prisma.AirportGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AirportGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AirportCountArgs<ExtArgs>
+            result: $Utils.Optional<AirportCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1009,6 +1095,36 @@ export namespace Prisma {
    * Count Types
    */
 
+
+  /**
+   * Count Type CityCountOutputType
+   */
+
+  export type CityCountOutputType = {
+    airports: number
+  }
+
+  export type CityCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    airports?: boolean | CityCountOutputTypeCountAirportsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * CityCountOutputType without action
+   */
+  export type CityCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CityCountOutputType
+     */
+    select?: CityCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * CityCountOutputType without action
+   */
+  export type CityCountOutputTypeCountAirportsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AirportWhereInput
+  }
 
 
   /**
@@ -3017,6 +3133,8 @@ export namespace Prisma {
   export type CitySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    airports?: boolean | City$airportsArgs<ExtArgs>
+    _count?: boolean | CityCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["city"]>
 
   export type CitySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3029,10 +3147,17 @@ export namespace Prisma {
     name?: boolean
   }
 
+  export type CityInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    airports?: boolean | City$airportsArgs<ExtArgs>
+    _count?: boolean | CityCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type CityIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $CityPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "City"
-    objects: {}
+    objects: {
+      airports: Prisma.$AirportPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       name: string
@@ -3400,6 +3525,7 @@ export namespace Prisma {
    */
   export interface Prisma__CityClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    airports<T extends City$airportsArgs<ExtArgs> = {}>(args?: Subset<T, City$airportsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AirportPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3444,6 +3570,10 @@ export namespace Prisma {
      */
     select?: CitySelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CityInclude<ExtArgs> | null
+    /**
      * Filter, which City to fetch.
      */
     where: CityWhereUniqueInput
@@ -3458,6 +3588,10 @@ export namespace Prisma {
      */
     select?: CitySelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CityInclude<ExtArgs> | null
+    /**
      * Filter, which City to fetch.
      */
     where: CityWhereUniqueInput
@@ -3471,6 +3605,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the City
      */
     select?: CitySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CityInclude<ExtArgs> | null
     /**
      * Filter, which City to fetch.
      */
@@ -3516,6 +3654,10 @@ export namespace Prisma {
      */
     select?: CitySelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CityInclude<ExtArgs> | null
+    /**
      * Filter, which City to fetch.
      */
     where?: CityWhereInput
@@ -3560,6 +3702,10 @@ export namespace Prisma {
      */
     select?: CitySelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CityInclude<ExtArgs> | null
+    /**
      * Filter, which Cities to fetch.
      */
     where?: CityWhereInput
@@ -3598,6 +3744,10 @@ export namespace Prisma {
      * Select specific fields to fetch from the City
      */
     select?: CitySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CityInclude<ExtArgs> | null
     /**
      * The data needed to create a City.
      */
@@ -3639,6 +3789,10 @@ export namespace Prisma {
      */
     select?: CitySelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CityInclude<ExtArgs> | null
+    /**
      * The data needed to update a City.
      */
     data: XOR<CityUpdateInput, CityUncheckedUpdateInput>
@@ -3671,6 +3825,10 @@ export namespace Prisma {
      */
     select?: CitySelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CityInclude<ExtArgs> | null
+    /**
      * The filter to search for the City to update in case it exists.
      */
     where: CityWhereUniqueInput
@@ -3693,6 +3851,10 @@ export namespace Prisma {
      */
     select?: CitySelect<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CityInclude<ExtArgs> | null
+    /**
      * Filter which City to delete.
      */
     where: CityWhereUniqueInput
@@ -3709,6 +3871,26 @@ export namespace Prisma {
   }
 
   /**
+   * City.airports
+   */
+  export type City$airportsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Airport
+     */
+    select?: AirportSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AirportInclude<ExtArgs> | null
+    where?: AirportWhereInput
+    orderBy?: AirportOrderByWithRelationInput | AirportOrderByWithRelationInput[]
+    cursor?: AirportWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AirportScalarFieldEnum | AirportScalarFieldEnum[]
+  }
+
+  /**
    * City without action
    */
   export type CityDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3716,6 +3898,981 @@ export namespace Prisma {
      * Select specific fields to fetch from the City
      */
     select?: CitySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CityInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Airport
+   */
+
+  export type AggregateAirport = {
+    _count: AirportCountAggregateOutputType | null
+    _avg: AirportAvgAggregateOutputType | null
+    _sum: AirportSumAggregateOutputType | null
+    _min: AirportMinAggregateOutputType | null
+    _max: AirportMaxAggregateOutputType | null
+  }
+
+  export type AirportAvgAggregateOutputType = {
+    id: number | null
+    cityId: number | null
+  }
+
+  export type AirportSumAggregateOutputType = {
+    id: number | null
+    cityId: number | null
+  }
+
+  export type AirportMinAggregateOutputType = {
+    id: number | null
+    name: string | null
+    code: string | null
+    address: string | null
+    cityId: number | null
+  }
+
+  export type AirportMaxAggregateOutputType = {
+    id: number | null
+    name: string | null
+    code: string | null
+    address: string | null
+    cityId: number | null
+  }
+
+  export type AirportCountAggregateOutputType = {
+    id: number
+    name: number
+    code: number
+    address: number
+    cityId: number
+    _all: number
+  }
+
+
+  export type AirportAvgAggregateInputType = {
+    id?: true
+    cityId?: true
+  }
+
+  export type AirportSumAggregateInputType = {
+    id?: true
+    cityId?: true
+  }
+
+  export type AirportMinAggregateInputType = {
+    id?: true
+    name?: true
+    code?: true
+    address?: true
+    cityId?: true
+  }
+
+  export type AirportMaxAggregateInputType = {
+    id?: true
+    name?: true
+    code?: true
+    address?: true
+    cityId?: true
+  }
+
+  export type AirportCountAggregateInputType = {
+    id?: true
+    name?: true
+    code?: true
+    address?: true
+    cityId?: true
+    _all?: true
+  }
+
+  export type AirportAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Airport to aggregate.
+     */
+    where?: AirportWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Airports to fetch.
+     */
+    orderBy?: AirportOrderByWithRelationInput | AirportOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AirportWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Airports from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Airports.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Airports
+    **/
+    _count?: true | AirportCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: AirportAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: AirportSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AirportMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AirportMaxAggregateInputType
+  }
+
+  export type GetAirportAggregateType<T extends AirportAggregateArgs> = {
+        [P in keyof T & keyof AggregateAirport]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAirport[P]>
+      : GetScalarType<T[P], AggregateAirport[P]>
+  }
+
+
+
+
+  export type AirportGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AirportWhereInput
+    orderBy?: AirportOrderByWithAggregationInput | AirportOrderByWithAggregationInput[]
+    by: AirportScalarFieldEnum[] | AirportScalarFieldEnum
+    having?: AirportScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AirportCountAggregateInputType | true
+    _avg?: AirportAvgAggregateInputType
+    _sum?: AirportSumAggregateInputType
+    _min?: AirportMinAggregateInputType
+    _max?: AirportMaxAggregateInputType
+  }
+
+  export type AirportGroupByOutputType = {
+    id: number
+    name: string
+    code: string
+    address: string | null
+    cityId: number
+    _count: AirportCountAggregateOutputType | null
+    _avg: AirportAvgAggregateOutputType | null
+    _sum: AirportSumAggregateOutputType | null
+    _min: AirportMinAggregateOutputType | null
+    _max: AirportMaxAggregateOutputType | null
+  }
+
+  type GetAirportGroupByPayload<T extends AirportGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AirportGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AirportGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AirportGroupByOutputType[P]>
+            : GetScalarType<T[P], AirportGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AirportSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    code?: boolean
+    address?: boolean
+    cityId?: boolean
+    city?: boolean | CityDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["airport"]>
+
+  export type AirportSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    code?: boolean
+    address?: boolean
+    cityId?: boolean
+    city?: boolean | CityDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["airport"]>
+
+  export type AirportSelectScalar = {
+    id?: boolean
+    name?: boolean
+    code?: boolean
+    address?: boolean
+    cityId?: boolean
+  }
+
+  export type AirportInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    city?: boolean | CityDefaultArgs<ExtArgs>
+  }
+  export type AirportIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    city?: boolean | CityDefaultArgs<ExtArgs>
+  }
+
+  export type $AirportPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Airport"
+    objects: {
+      city: Prisma.$CityPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      name: string
+      code: string
+      address: string | null
+      cityId: number
+    }, ExtArgs["result"]["airport"]>
+    composites: {}
+  }
+
+  type AirportGetPayload<S extends boolean | null | undefined | AirportDefaultArgs> = $Result.GetResult<Prisma.$AirportPayload, S>
+
+  type AirportCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<AirportFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: AirportCountAggregateInputType | true
+    }
+
+  export interface AirportDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Airport'], meta: { name: 'Airport' } }
+    /**
+     * Find zero or one Airport that matches the filter.
+     * @param {AirportFindUniqueArgs} args - Arguments to find a Airport
+     * @example
+     * // Get one Airport
+     * const airport = await prisma.airport.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AirportFindUniqueArgs>(args: SelectSubset<T, AirportFindUniqueArgs<ExtArgs>>): Prisma__AirportClient<$Result.GetResult<Prisma.$AirportPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one Airport that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {AirportFindUniqueOrThrowArgs} args - Arguments to find a Airport
+     * @example
+     * // Get one Airport
+     * const airport = await prisma.airport.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AirportFindUniqueOrThrowArgs>(args: SelectSubset<T, AirportFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AirportClient<$Result.GetResult<Prisma.$AirportPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first Airport that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AirportFindFirstArgs} args - Arguments to find a Airport
+     * @example
+     * // Get one Airport
+     * const airport = await prisma.airport.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AirportFindFirstArgs>(args?: SelectSubset<T, AirportFindFirstArgs<ExtArgs>>): Prisma__AirportClient<$Result.GetResult<Prisma.$AirportPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first Airport that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AirportFindFirstOrThrowArgs} args - Arguments to find a Airport
+     * @example
+     * // Get one Airport
+     * const airport = await prisma.airport.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AirportFindFirstOrThrowArgs>(args?: SelectSubset<T, AirportFindFirstOrThrowArgs<ExtArgs>>): Prisma__AirportClient<$Result.GetResult<Prisma.$AirportPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more Airports that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AirportFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Airports
+     * const airports = await prisma.airport.findMany()
+     * 
+     * // Get first 10 Airports
+     * const airports = await prisma.airport.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const airportWithIdOnly = await prisma.airport.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AirportFindManyArgs>(args?: SelectSubset<T, AirportFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AirportPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a Airport.
+     * @param {AirportCreateArgs} args - Arguments to create a Airport.
+     * @example
+     * // Create one Airport
+     * const Airport = await prisma.airport.create({
+     *   data: {
+     *     // ... data to create a Airport
+     *   }
+     * })
+     * 
+     */
+    create<T extends AirportCreateArgs>(args: SelectSubset<T, AirportCreateArgs<ExtArgs>>): Prisma__AirportClient<$Result.GetResult<Prisma.$AirportPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many Airports.
+     * @param {AirportCreateManyArgs} args - Arguments to create many Airports.
+     * @example
+     * // Create many Airports
+     * const airport = await prisma.airport.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AirportCreateManyArgs>(args?: SelectSubset<T, AirportCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Airports and returns the data saved in the database.
+     * @param {AirportCreateManyAndReturnArgs} args - Arguments to create many Airports.
+     * @example
+     * // Create many Airports
+     * const airport = await prisma.airport.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Airports and only return the `id`
+     * const airportWithIdOnly = await prisma.airport.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AirportCreateManyAndReturnArgs>(args?: SelectSubset<T, AirportCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AirportPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a Airport.
+     * @param {AirportDeleteArgs} args - Arguments to delete one Airport.
+     * @example
+     * // Delete one Airport
+     * const Airport = await prisma.airport.delete({
+     *   where: {
+     *     // ... filter to delete one Airport
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AirportDeleteArgs>(args: SelectSubset<T, AirportDeleteArgs<ExtArgs>>): Prisma__AirportClient<$Result.GetResult<Prisma.$AirportPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one Airport.
+     * @param {AirportUpdateArgs} args - Arguments to update one Airport.
+     * @example
+     * // Update one Airport
+     * const airport = await prisma.airport.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AirportUpdateArgs>(args: SelectSubset<T, AirportUpdateArgs<ExtArgs>>): Prisma__AirportClient<$Result.GetResult<Prisma.$AirportPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more Airports.
+     * @param {AirportDeleteManyArgs} args - Arguments to filter Airports to delete.
+     * @example
+     * // Delete a few Airports
+     * const { count } = await prisma.airport.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AirportDeleteManyArgs>(args?: SelectSubset<T, AirportDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Airports.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AirportUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Airports
+     * const airport = await prisma.airport.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AirportUpdateManyArgs>(args: SelectSubset<T, AirportUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Airport.
+     * @param {AirportUpsertArgs} args - Arguments to update or create a Airport.
+     * @example
+     * // Update or create a Airport
+     * const airport = await prisma.airport.upsert({
+     *   create: {
+     *     // ... data to create a Airport
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Airport we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AirportUpsertArgs>(args: SelectSubset<T, AirportUpsertArgs<ExtArgs>>): Prisma__AirportClient<$Result.GetResult<Prisma.$AirportPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of Airports.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AirportCountArgs} args - Arguments to filter Airports to count.
+     * @example
+     * // Count the number of Airports
+     * const count = await prisma.airport.count({
+     *   where: {
+     *     // ... the filter for the Airports we want to count
+     *   }
+     * })
+    **/
+    count<T extends AirportCountArgs>(
+      args?: Subset<T, AirportCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AirportCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Airport.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AirportAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AirportAggregateArgs>(args: Subset<T, AirportAggregateArgs>): Prisma.PrismaPromise<GetAirportAggregateType<T>>
+
+    /**
+     * Group by Airport.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AirportGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AirportGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AirportGroupByArgs['orderBy'] }
+        : { orderBy?: AirportGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AirportGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAirportGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Airport model
+   */
+  readonly fields: AirportFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Airport.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AirportClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    city<T extends CityDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CityDefaultArgs<ExtArgs>>): Prisma__CityClient<$Result.GetResult<Prisma.$CityPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Airport model
+   */ 
+  interface AirportFieldRefs {
+    readonly id: FieldRef<"Airport", 'Int'>
+    readonly name: FieldRef<"Airport", 'String'>
+    readonly code: FieldRef<"Airport", 'String'>
+    readonly address: FieldRef<"Airport", 'String'>
+    readonly cityId: FieldRef<"Airport", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Airport findUnique
+   */
+  export type AirportFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Airport
+     */
+    select?: AirportSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AirportInclude<ExtArgs> | null
+    /**
+     * Filter, which Airport to fetch.
+     */
+    where: AirportWhereUniqueInput
+  }
+
+  /**
+   * Airport findUniqueOrThrow
+   */
+  export type AirportFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Airport
+     */
+    select?: AirportSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AirportInclude<ExtArgs> | null
+    /**
+     * Filter, which Airport to fetch.
+     */
+    where: AirportWhereUniqueInput
+  }
+
+  /**
+   * Airport findFirst
+   */
+  export type AirportFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Airport
+     */
+    select?: AirportSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AirportInclude<ExtArgs> | null
+    /**
+     * Filter, which Airport to fetch.
+     */
+    where?: AirportWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Airports to fetch.
+     */
+    orderBy?: AirportOrderByWithRelationInput | AirportOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Airports.
+     */
+    cursor?: AirportWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Airports from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Airports.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Airports.
+     */
+    distinct?: AirportScalarFieldEnum | AirportScalarFieldEnum[]
+  }
+
+  /**
+   * Airport findFirstOrThrow
+   */
+  export type AirportFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Airport
+     */
+    select?: AirportSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AirportInclude<ExtArgs> | null
+    /**
+     * Filter, which Airport to fetch.
+     */
+    where?: AirportWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Airports to fetch.
+     */
+    orderBy?: AirportOrderByWithRelationInput | AirportOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Airports.
+     */
+    cursor?: AirportWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Airports from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Airports.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Airports.
+     */
+    distinct?: AirportScalarFieldEnum | AirportScalarFieldEnum[]
+  }
+
+  /**
+   * Airport findMany
+   */
+  export type AirportFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Airport
+     */
+    select?: AirportSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AirportInclude<ExtArgs> | null
+    /**
+     * Filter, which Airports to fetch.
+     */
+    where?: AirportWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Airports to fetch.
+     */
+    orderBy?: AirportOrderByWithRelationInput | AirportOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Airports.
+     */
+    cursor?: AirportWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Airports from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Airports.
+     */
+    skip?: number
+    distinct?: AirportScalarFieldEnum | AirportScalarFieldEnum[]
+  }
+
+  /**
+   * Airport create
+   */
+  export type AirportCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Airport
+     */
+    select?: AirportSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AirportInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Airport.
+     */
+    data: XOR<AirportCreateInput, AirportUncheckedCreateInput>
+  }
+
+  /**
+   * Airport createMany
+   */
+  export type AirportCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Airports.
+     */
+    data: AirportCreateManyInput | AirportCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Airport createManyAndReturn
+   */
+  export type AirportCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Airport
+     */
+    select?: AirportSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many Airports.
+     */
+    data: AirportCreateManyInput | AirportCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AirportIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Airport update
+   */
+  export type AirportUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Airport
+     */
+    select?: AirportSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AirportInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Airport.
+     */
+    data: XOR<AirportUpdateInput, AirportUncheckedUpdateInput>
+    /**
+     * Choose, which Airport to update.
+     */
+    where: AirportWhereUniqueInput
+  }
+
+  /**
+   * Airport updateMany
+   */
+  export type AirportUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Airports.
+     */
+    data: XOR<AirportUpdateManyMutationInput, AirportUncheckedUpdateManyInput>
+    /**
+     * Filter which Airports to update
+     */
+    where?: AirportWhereInput
+  }
+
+  /**
+   * Airport upsert
+   */
+  export type AirportUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Airport
+     */
+    select?: AirportSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AirportInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Airport to update in case it exists.
+     */
+    where: AirportWhereUniqueInput
+    /**
+     * In case the Airport found by the `where` argument doesn't exist, create a new Airport with this data.
+     */
+    create: XOR<AirportCreateInput, AirportUncheckedCreateInput>
+    /**
+     * In case the Airport was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AirportUpdateInput, AirportUncheckedUpdateInput>
+  }
+
+  /**
+   * Airport delete
+   */
+  export type AirportDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Airport
+     */
+    select?: AirportSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AirportInclude<ExtArgs> | null
+    /**
+     * Filter which Airport to delete.
+     */
+    where: AirportWhereUniqueInput
+  }
+
+  /**
+   * Airport deleteMany
+   */
+  export type AirportDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Airports to delete
+     */
+    where?: AirportWhereInput
+  }
+
+  /**
+   * Airport without action
+   */
+  export type AirportDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Airport
+     */
+    select?: AirportSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AirportInclude<ExtArgs> | null
   }
 
 
@@ -3761,6 +4918,17 @@ export namespace Prisma {
   };
 
   export type CityScalarFieldEnum = (typeof CityScalarFieldEnum)[keyof typeof CityScalarFieldEnum]
+
+
+  export const AirportScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    code: 'code',
+    address: 'address',
+    cityId: 'cityId'
+  };
+
+  export type AirportScalarFieldEnum = (typeof AirportScalarFieldEnum)[keyof typeof AirportScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -3965,11 +5133,13 @@ export namespace Prisma {
     NOT?: CityWhereInput | CityWhereInput[]
     id?: IntFilter<"City"> | number
     name?: StringFilter<"City"> | string
+    airports?: AirportListRelationFilter
   }
 
   export type CityOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
+    airports?: AirportOrderByRelationAggregateInput
   }
 
   export type CityWhereUniqueInput = Prisma.AtLeast<{
@@ -3978,6 +5148,7 @@ export namespace Prisma {
     AND?: CityWhereInput | CityWhereInput[]
     OR?: CityWhereInput[]
     NOT?: CityWhereInput | CityWhereInput[]
+    airports?: AirportListRelationFilter
   }, "id" | "name">
 
   export type CityOrderByWithAggregationInput = {
@@ -3996,6 +5167,63 @@ export namespace Prisma {
     NOT?: CityScalarWhereWithAggregatesInput | CityScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"City"> | number
     name?: StringWithAggregatesFilter<"City"> | string
+  }
+
+  export type AirportWhereInput = {
+    AND?: AirportWhereInput | AirportWhereInput[]
+    OR?: AirportWhereInput[]
+    NOT?: AirportWhereInput | AirportWhereInput[]
+    id?: IntFilter<"Airport"> | number
+    name?: StringFilter<"Airport"> | string
+    code?: StringFilter<"Airport"> | string
+    address?: StringNullableFilter<"Airport"> | string | null
+    cityId?: IntFilter<"Airport"> | number
+    city?: XOR<CityRelationFilter, CityWhereInput>
+  }
+
+  export type AirportOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    code?: SortOrder
+    address?: SortOrderInput | SortOrder
+    cityId?: SortOrder
+    city?: CityOrderByWithRelationInput
+  }
+
+  export type AirportWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    name?: string
+    code?: string
+    AND?: AirportWhereInput | AirportWhereInput[]
+    OR?: AirportWhereInput[]
+    NOT?: AirportWhereInput | AirportWhereInput[]
+    address?: StringNullableFilter<"Airport"> | string | null
+    cityId?: IntFilter<"Airport"> | number
+    city?: XOR<CityRelationFilter, CityWhereInput>
+  }, "id" | "name" | "code">
+
+  export type AirportOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    code?: SortOrder
+    address?: SortOrderInput | SortOrder
+    cityId?: SortOrder
+    _count?: AirportCountOrderByAggregateInput
+    _avg?: AirportAvgOrderByAggregateInput
+    _max?: AirportMaxOrderByAggregateInput
+    _min?: AirportMinOrderByAggregateInput
+    _sum?: AirportSumOrderByAggregateInput
+  }
+
+  export type AirportScalarWhereWithAggregatesInput = {
+    AND?: AirportScalarWhereWithAggregatesInput | AirportScalarWhereWithAggregatesInput[]
+    OR?: AirportScalarWhereWithAggregatesInput[]
+    NOT?: AirportScalarWhereWithAggregatesInput | AirportScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Airport"> | number
+    name?: StringWithAggregatesFilter<"Airport"> | string
+    code?: StringWithAggregatesFilter<"Airport"> | string
+    address?: StringNullableWithAggregatesFilter<"Airport"> | string | null
+    cityId?: IntWithAggregatesFilter<"Airport"> | number
   }
 
   export type UserCreateInput = {
@@ -4106,20 +5334,24 @@ export namespace Prisma {
 
   export type CityCreateInput = {
     name: string
+    airports?: AirportCreateNestedManyWithoutCityInput
   }
 
   export type CityUncheckedCreateInput = {
     id?: number
     name: string
+    airports?: AirportUncheckedCreateNestedManyWithoutCityInput
   }
 
   export type CityUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
+    airports?: AirportUpdateManyWithoutCityNestedInput
   }
 
   export type CityUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    airports?: AirportUncheckedUpdateManyWithoutCityNestedInput
   }
 
   export type CityCreateManyInput = {
@@ -4134,6 +5366,58 @@ export namespace Prisma {
   export type CityUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AirportCreateInput = {
+    name: string
+    code: string
+    address?: string | null
+    city: CityCreateNestedOneWithoutAirportsInput
+  }
+
+  export type AirportUncheckedCreateInput = {
+    id?: number
+    name: string
+    code: string
+    address?: string | null
+    cityId: number
+  }
+
+  export type AirportUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: CityUpdateOneRequiredWithoutAirportsNestedInput
+  }
+
+  export type AirportUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    cityId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type AirportCreateManyInput = {
+    id?: number
+    name: string
+    code: string
+    address?: string | null
+    cityId: number
+  }
+
+  export type AirportUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type AirportUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    cityId?: IntFieldUpdateOperationsInput | number
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -4325,6 +5609,16 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type AirportListRelationFilter = {
+    every?: AirportWhereInput
+    some?: AirportWhereInput
+    none?: AirportWhereInput
+  }
+
+  export type AirportOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type CityCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -4348,6 +5642,45 @@ export namespace Prisma {
     id?: SortOrder
   }
 
+  export type CityRelationFilter = {
+    is?: CityWhereInput
+    isNot?: CityWhereInput
+  }
+
+  export type AirportCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    code?: SortOrder
+    address?: SortOrder
+    cityId?: SortOrder
+  }
+
+  export type AirportAvgOrderByAggregateInput = {
+    id?: SortOrder
+    cityId?: SortOrder
+  }
+
+  export type AirportMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    code?: SortOrder
+    address?: SortOrder
+    cityId?: SortOrder
+  }
+
+  export type AirportMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    code?: SortOrder
+    address?: SortOrder
+    cityId?: SortOrder
+  }
+
+  export type AirportSumOrderByAggregateInput = {
+    id?: SortOrder
+    cityId?: SortOrder
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -4366,6 +5699,62 @@ export namespace Prisma {
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type AirportCreateNestedManyWithoutCityInput = {
+    create?: XOR<AirportCreateWithoutCityInput, AirportUncheckedCreateWithoutCityInput> | AirportCreateWithoutCityInput[] | AirportUncheckedCreateWithoutCityInput[]
+    connectOrCreate?: AirportCreateOrConnectWithoutCityInput | AirportCreateOrConnectWithoutCityInput[]
+    createMany?: AirportCreateManyCityInputEnvelope
+    connect?: AirportWhereUniqueInput | AirportWhereUniqueInput[]
+  }
+
+  export type AirportUncheckedCreateNestedManyWithoutCityInput = {
+    create?: XOR<AirportCreateWithoutCityInput, AirportUncheckedCreateWithoutCityInput> | AirportCreateWithoutCityInput[] | AirportUncheckedCreateWithoutCityInput[]
+    connectOrCreate?: AirportCreateOrConnectWithoutCityInput | AirportCreateOrConnectWithoutCityInput[]
+    createMany?: AirportCreateManyCityInputEnvelope
+    connect?: AirportWhereUniqueInput | AirportWhereUniqueInput[]
+  }
+
+  export type AirportUpdateManyWithoutCityNestedInput = {
+    create?: XOR<AirportCreateWithoutCityInput, AirportUncheckedCreateWithoutCityInput> | AirportCreateWithoutCityInput[] | AirportUncheckedCreateWithoutCityInput[]
+    connectOrCreate?: AirportCreateOrConnectWithoutCityInput | AirportCreateOrConnectWithoutCityInput[]
+    upsert?: AirportUpsertWithWhereUniqueWithoutCityInput | AirportUpsertWithWhereUniqueWithoutCityInput[]
+    createMany?: AirportCreateManyCityInputEnvelope
+    set?: AirportWhereUniqueInput | AirportWhereUniqueInput[]
+    disconnect?: AirportWhereUniqueInput | AirportWhereUniqueInput[]
+    delete?: AirportWhereUniqueInput | AirportWhereUniqueInput[]
+    connect?: AirportWhereUniqueInput | AirportWhereUniqueInput[]
+    update?: AirportUpdateWithWhereUniqueWithoutCityInput | AirportUpdateWithWhereUniqueWithoutCityInput[]
+    updateMany?: AirportUpdateManyWithWhereWithoutCityInput | AirportUpdateManyWithWhereWithoutCityInput[]
+    deleteMany?: AirportScalarWhereInput | AirportScalarWhereInput[]
+  }
+
+  export type AirportUncheckedUpdateManyWithoutCityNestedInput = {
+    create?: XOR<AirportCreateWithoutCityInput, AirportUncheckedCreateWithoutCityInput> | AirportCreateWithoutCityInput[] | AirportUncheckedCreateWithoutCityInput[]
+    connectOrCreate?: AirportCreateOrConnectWithoutCityInput | AirportCreateOrConnectWithoutCityInput[]
+    upsert?: AirportUpsertWithWhereUniqueWithoutCityInput | AirportUpsertWithWhereUniqueWithoutCityInput[]
+    createMany?: AirportCreateManyCityInputEnvelope
+    set?: AirportWhereUniqueInput | AirportWhereUniqueInput[]
+    disconnect?: AirportWhereUniqueInput | AirportWhereUniqueInput[]
+    delete?: AirportWhereUniqueInput | AirportWhereUniqueInput[]
+    connect?: AirportWhereUniqueInput | AirportWhereUniqueInput[]
+    update?: AirportUpdateWithWhereUniqueWithoutCityInput | AirportUpdateWithWhereUniqueWithoutCityInput[]
+    updateMany?: AirportUpdateManyWithWhereWithoutCityInput | AirportUpdateManyWithWhereWithoutCityInput[]
+    deleteMany?: AirportScalarWhereInput | AirportScalarWhereInput[]
+  }
+
+  export type CityCreateNestedOneWithoutAirportsInput = {
+    create?: XOR<CityCreateWithoutAirportsInput, CityUncheckedCreateWithoutAirportsInput>
+    connectOrCreate?: CityCreateOrConnectWithoutAirportsInput
+    connect?: CityWhereUniqueInput
+  }
+
+  export type CityUpdateOneRequiredWithoutAirportsNestedInput = {
+    create?: XOR<CityCreateWithoutAirportsInput, CityUncheckedCreateWithoutAirportsInput>
+    connectOrCreate?: CityCreateOrConnectWithoutAirportsInput
+    upsert?: CityUpsertWithoutAirportsInput
+    connect?: CityWhereUniqueInput
+    update?: XOR<XOR<CityUpdateToOneWithWhereWithoutAirportsInput, CityUpdateWithoutAirportsInput>, CityUncheckedUpdateWithoutAirportsInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -4504,11 +5893,126 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type AirportCreateWithoutCityInput = {
+    name: string
+    code: string
+    address?: string | null
+  }
+
+  export type AirportUncheckedCreateWithoutCityInput = {
+    id?: number
+    name: string
+    code: string
+    address?: string | null
+  }
+
+  export type AirportCreateOrConnectWithoutCityInput = {
+    where: AirportWhereUniqueInput
+    create: XOR<AirportCreateWithoutCityInput, AirportUncheckedCreateWithoutCityInput>
+  }
+
+  export type AirportCreateManyCityInputEnvelope = {
+    data: AirportCreateManyCityInput | AirportCreateManyCityInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AirportUpsertWithWhereUniqueWithoutCityInput = {
+    where: AirportWhereUniqueInput
+    update: XOR<AirportUpdateWithoutCityInput, AirportUncheckedUpdateWithoutCityInput>
+    create: XOR<AirportCreateWithoutCityInput, AirportUncheckedCreateWithoutCityInput>
+  }
+
+  export type AirportUpdateWithWhereUniqueWithoutCityInput = {
+    where: AirportWhereUniqueInput
+    data: XOR<AirportUpdateWithoutCityInput, AirportUncheckedUpdateWithoutCityInput>
+  }
+
+  export type AirportUpdateManyWithWhereWithoutCityInput = {
+    where: AirportScalarWhereInput
+    data: XOR<AirportUpdateManyMutationInput, AirportUncheckedUpdateManyWithoutCityInput>
+  }
+
+  export type AirportScalarWhereInput = {
+    AND?: AirportScalarWhereInput | AirportScalarWhereInput[]
+    OR?: AirportScalarWhereInput[]
+    NOT?: AirportScalarWhereInput | AirportScalarWhereInput[]
+    id?: IntFilter<"Airport"> | number
+    name?: StringFilter<"Airport"> | string
+    code?: StringFilter<"Airport"> | string
+    address?: StringNullableFilter<"Airport"> | string | null
+    cityId?: IntFilter<"Airport"> | number
+  }
+
+  export type CityCreateWithoutAirportsInput = {
+    name: string
+  }
+
+  export type CityUncheckedCreateWithoutAirportsInput = {
+    id?: number
+    name: string
+  }
+
+  export type CityCreateOrConnectWithoutAirportsInput = {
+    where: CityWhereUniqueInput
+    create: XOR<CityCreateWithoutAirportsInput, CityUncheckedCreateWithoutAirportsInput>
+  }
+
+  export type CityUpsertWithoutAirportsInput = {
+    update: XOR<CityUpdateWithoutAirportsInput, CityUncheckedUpdateWithoutAirportsInput>
+    create: XOR<CityCreateWithoutAirportsInput, CityUncheckedCreateWithoutAirportsInput>
+    where?: CityWhereInput
+  }
+
+  export type CityUpdateToOneWithWhereWithoutAirportsInput = {
+    where?: CityWhereInput
+    data: XOR<CityUpdateWithoutAirportsInput, CityUncheckedUpdateWithoutAirportsInput>
+  }
+
+  export type CityUpdateWithoutAirportsInput = {
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type CityUncheckedUpdateWithoutAirportsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AirportCreateManyCityInput = {
+    id?: number
+    name: string
+    code: string
+    address?: string | null
+  }
+
+  export type AirportUpdateWithoutCityInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type AirportUncheckedUpdateWithoutCityInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type AirportUncheckedUpdateManyWithoutCityInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
 
 
   /**
    * Aliases for legacy arg types
    */
+    /**
+     * @deprecated Use CityCountOutputTypeDefaultArgs instead
+     */
+    export type CityCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = CityCountOutputTypeDefaultArgs<ExtArgs>
     /**
      * @deprecated Use UserDefaultArgs instead
      */
@@ -4521,6 +6025,10 @@ export namespace Prisma {
      * @deprecated Use CityDefaultArgs instead
      */
     export type CityArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = CityDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use AirportDefaultArgs instead
+     */
+    export type AirportArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = AirportDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

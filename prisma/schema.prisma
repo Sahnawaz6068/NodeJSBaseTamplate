@@ -26,6 +26,17 @@ model Airplane {
 }
 
 model City {
-  id    Int @id @default(autoincrement())
-  name  String @unique
+  id       Int       @id @default(autoincrement())
+  name     String    @unique
+  airports Airport[]
+}
+
+model Airport {
+  id      Int    @id @default(autoincrement())
+  name    String @unique
+  code    String @unique
+  address String?            // removed unique unless needed
+  cityId  Int
+  city    City   @relation(fields: [cityId], references: [id])
+  @@index([cityId])
 }

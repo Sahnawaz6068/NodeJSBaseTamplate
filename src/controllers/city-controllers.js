@@ -5,7 +5,7 @@ import cityService from "../services/city-service.js";
 const errorResponse = reqResponses.ErrorResponse;
 const sucessResponse = reqResponses.SucessResponse;
 
-// API --> POST:/city
+// API --> POST:/cities
 async function createCity(req, res) {
   try {
     const city = await cityService.createCity({
@@ -23,7 +23,7 @@ async function createCity(req, res) {
     return res.status(status).json(errorResponse);
   }
 }
-//API --> GET:/city/:id
+//API --> GET:/cities/:id
 async function getCityById(req, res) {
   try {
     const response = await cityService.readCityById(req.params.id);
@@ -39,7 +39,7 @@ async function getCityById(req, res) {
     return res.status(status).json(errorResponse);
   }
 }
-//API -->GET:/city/:id
+//API -->GET:/cities/
 async function getAllCity(req, res) {
   try {
     const response = await cityService.readAllCity();
@@ -56,7 +56,7 @@ async function getAllCity(req, res) {
     return res.status(status).json(errorResponse);
   }
 }
-//API -->DELETE:/city/:id
+//API -->DELETE:/cities/:id
 async function deleteCityById(req, res) {
   try {
     const response = await cityService.deleteCityById(req.params.id);
