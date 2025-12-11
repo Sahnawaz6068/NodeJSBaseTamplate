@@ -37,7 +37,28 @@ model Airport {
   code    String  @unique
   address String? // removed unique unless needed
   cityId  Int
-  city    City    @relation(fields: [cityId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  city    City    @relation(fields: [cityId], references: [id], onDelete: Cascade)
 
   @@index([cityId])
+}
+
+model Flight {
+  id                 Int      @id @default(autoincrement())
+  flightNumber       String // varchar(255) NOT NULL
+  airplaneId         Int // int NOT NULL
+  departureAirportId String // varchar(255) NOT NULL
+  arrivalAirportId   String // varchar(255) NOT NULL
+  arrivalTime        DateTime // datetime NOT NULL
+  departureTime      DateTime // datetime NOT NULL
+  price              Int // int NOT NULL
+  boardingGate       String? // varchar(255) NULL
+  totalSeats         Int // int NOT NULL
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  /// Optional indexes to reflect MySQL `MUL` keys (add if helpful)
+  @@index([airplaneId])
+  @@index([departureAirportId])
+  @@index([arrivalAirportId])
 }

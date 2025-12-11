@@ -151,6 +151,21 @@ exports.Prisma.AirportScalarFieldEnum = {
   cityId: 'cityId'
 };
 
+exports.Prisma.FlightScalarFieldEnum = {
+  id: 'id',
+  flightNumber: 'flightNumber',
+  airplaneId: 'airplaneId',
+  departureAirportId: 'departureAirportId',
+  arrivalAirportId: 'arrivalAirportId',
+  arrivalTime: 'arrivalTime',
+  departureTime: 'departureTime',
+  price: 'price',
+  boardingGate: 'boardingGate',
+  totalSeats: 'totalSeats',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -171,7 +186,8 @@ exports.Prisma.ModelName = {
   User: 'User',
   Airplane: 'Airplane',
   City: 'City',
-  Airport: 'Airport'
+  Airport: 'Airport',
+  Flight: 'Flight'
 };
 
 /**
