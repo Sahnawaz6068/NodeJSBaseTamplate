@@ -38,7 +38,21 @@ async function getAirport(req, res) {
   }
 }
 
+async function allAirport (req,res){
+    try{
+        const response = await airportService.readAllAirport();
+        sucessResponse.data = response;
+        return res.status(StatusCodes.OK).json(sucessResponse)
+    }catch(error){
+        const statusCode = error.statusCode || StatusCodes.INTERNAL_SERVER_ERROR;
+        errorResponse.message = error.message;
+        errorResponse.statusCode = statusCode
+        return res.status(statusCode).json(errorResponse);
+    }
+}
+
 export default {
   createAirport,
   getAirport,
+  allAirport
 };
