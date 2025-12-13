@@ -29,9 +29,9 @@ async function getAirport(req, res) {
     const Airport = await airportService.readAirportById(req.params.id);
     sucessResponse.message = `The airport for id:${req.params.id} is here..`;
     sucessResponse.data = Airport;
-    return res.StatusCodes(StatusCodes.OK).json(sucessResponse);
+    return res.status(StatusCodes.OK).json(sucessResponse);
   } catch (error) {
-    const statusCode = errorResponse || StatusCodes.INTERNAL_SERVER_ERROR;
+    const statusCode = error.statusCode || StatusCodes.INTERNAL_SERVER_ERROR;
     errorResponse.data = error.message;
     errorResponse.message = statusCode;
     return res.status(statusCode).json(errorResponse);
