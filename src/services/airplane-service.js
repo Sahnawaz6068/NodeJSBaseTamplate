@@ -12,7 +12,7 @@ async function createAirplane(data) {
     throw error;
   }
 }
-
+ 
 async function getAllAirplanes() {
   try {
     const airplanes = await airplaneRepository.readAll();

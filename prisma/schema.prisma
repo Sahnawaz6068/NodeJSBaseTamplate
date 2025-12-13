@@ -30,7 +30,7 @@ model City {
   name     String    @unique
   airports Airport[]
 }
-
+ 
 model Airport {
   id      Int    @id @default(autoincrement())
   name    String @unique

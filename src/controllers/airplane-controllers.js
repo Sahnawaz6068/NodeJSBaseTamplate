@@ -7,9 +7,9 @@ const sucessResponse = reqResponses.SucessResponse;
 
 // API --> POST:/airplanes
 // req-body --> { modelNumber: 'AirBus-230', capacity:230 }
-
+ 
 async function createAirplane(req, res) {
-  console.log(req.body);
+  // console.log(req.body);
 
   try {
     //createAirplane service return the airplane
