@@ -51,8 +51,24 @@ async function allAirport (req,res){
     }
 }
 
+async function deleteAirport(req,res) {
+    try{
+        const response = await airportService.deleteAirport(req.params.id);
+        sucessResponse.data = response;
+        sucessResponse.message = "Airport is deleted"
+        return res.status(StatusCodes.OK).json(sucessResponse)
+    }catch(error){
+        const status = error.statusCode || StatusCodes.INTERNAL_SERVER_ERROR
+        errorResponse.message = error.message;
+        errorResponse.statusCode = status
+        return res.status(status).json(errorResponse)
+    }
+
+}
+
 export default {
   createAirport,
   getAirport,
-  allAirport
+  allAirport,
+  deleteAirport
 };
