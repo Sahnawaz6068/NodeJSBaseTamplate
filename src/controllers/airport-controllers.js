@@ -32,8 +32,9 @@ async function getAirport(req, res) {
     return res.status(StatusCodes.OK).json(sucessResponse);
   } catch (error) {
     const statusCode = error.statusCode || StatusCodes.INTERNAL_SERVER_ERROR;
-    errorResponse.data = error.message;
-    errorResponse.message = statusCode;
+    errorResponse.data = `Id is ${req.params.id}`;
+    errorResponse.message = error.message;
+    errorResponse.statusCode = statusCode;
     return res.status(statusCode).json(errorResponse);
   }
 }
@@ -67,7 +68,7 @@ async function deleteAirport(req,res) {
 }
 
 export default {
-  createAirport,
+  createAirport, 
   getAirport,
   allAirport,
   deleteAirport
