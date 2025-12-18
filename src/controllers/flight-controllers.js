@@ -46,6 +46,20 @@ async function createFlight(req, res) {
   }
 }
 
+async function getAllFlight(req,res) {
+  try {
+    const flight = await flightService.getAllFlight(req.query);
+    sucessResponse.data = flight;
+    return res.status(StatusCodes.OK).json(flight)
+  } catch (error) {
+    errorResponse.message = error.message;
+    return res
+            .status(StatusCodes.INTERNAL_SERVER_ERROR)
+            .json(errorResponse)
+  }
+}
+
 export default {
   createFlight,
+  getAllFlight
 };
