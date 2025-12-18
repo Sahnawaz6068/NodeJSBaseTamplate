@@ -13,6 +13,11 @@ async function createFlight(data) {
   }
 }
 
+async function getAllFlight(filter) {
+  let customFilter = {};
+  //F1: trips =MUM-DEL
+}
+
 export default {
   createFlight,
 };
