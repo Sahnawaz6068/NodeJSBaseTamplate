@@ -38,10 +38,11 @@ async function createFlight(req, res) {
     sucessResponse.message = `Flight Create`;
     return res.status(StatusCodes.CREATED).json(sucessResponse);
   } catch (error) {
-    const status = error.statusCode;
+    const status = error.statusCode || StatusCodes.INTERNAL_SERVER_ERROR;
+    
     errorResponse.message = error.message;
-    error.statusCode = status;
     errorResponse.error = error;
+    
     return res.status(status).json(errorResponse);
   }
 }
