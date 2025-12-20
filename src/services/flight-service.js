@@ -16,24 +16,30 @@ async function createFlight(data) {
 async function getAllFlight(query) {
   let customFilter = {};
   //F1: trips =MUM-DEL
-  if(query.trips){
-    const [departureAirportId,arrivalAirportId] = query.trips.split("-");
+  if (query.trips) {
+    const [departureAirportId, arrivalAirportId] = query.trips.split("-");
     customFilter.departureAirportId = departureAirportId;
     customFilter.arrivalAirportId = arrivalAirportId;
     // TODO : Add a Check that they are not same
   }
-  if(query.price){
-    const [minimumPrice,maximumPrice] = query.price.split("-");
+  if (query.price) {
+    const [minimumPrice, maximumPrice] = query.price.split("-");
     customFilter.price = {
-        gte: parseInt(minimumPrice), // Greater than or equal to min
-        lte: parseInt((maximumPrice==undefined)?20000:maximumPrice)  // Less than or equal to max
-    }
+      gte: parseInt(minimumPrice), // Greater than or equal to min
+      lte: parseInt(maximumPrice == undefined ? 20000 : maximumPrice), // Less than or equal to max
+    };
+  }
+  if (query.travellers) {
+    const totalSeats = query.travellers == undefined ? 100 :query.travellers;
+    customFilter.totalSeats = {
+      gte: parseInt(totalSeats),
+    };
   }
   try {
     const flights = await FlightRepository.getAllFlight(customFilter);
-    return flights
+    return flights;
   } catch (error) {
-     throw new Error(
+    throw new Error(
       "can not fetch data of all the flight",
       StatusCodes.INTERNAL_SERVER_ERROR
     );
@@ -42,5 +48,5 @@ async function getAllFlight(query) {
 
 export default {
   createFlight,
-  getAllFlight
+  getAllFlight,
 };
