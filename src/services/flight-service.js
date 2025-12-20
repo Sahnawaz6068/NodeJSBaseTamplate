@@ -35,6 +35,18 @@ async function getAllFlight(query) {
       gte: parseInt(totalSeats),
     };
   }
+  //Date based Filter
+ if (query.tripDate) {
+    // 1.Start Day (00:00:00)
+    const startOfDay = new Date(`${query.tripDate}T00:00:00.000Z`);   
+    // 2. END day (23:59:59)
+    const endOfDay = new Date(`${query.tripDate}T23:59:59.999Z`);
+    customFilter.departureTime = {
+        gte: startOfDay,
+        lte: endOfDay
+    };
+}
+
   try {
     const flights = await FlightRepository.getAllFlight(customFilter);
     return flights;
