@@ -1245,6 +1245,46 @@ export namespace Prisma {
 
 
   /**
+   * Count Type AirportCountOutputType
+   */
+
+  export type AirportCountOutputType = {
+    departure: number
+    arrival: number
+  }
+
+  export type AirportCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    departure?: boolean | AirportCountOutputTypeCountDepartureArgs
+    arrival?: boolean | AirportCountOutputTypeCountArrivalArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * AirportCountOutputType without action
+   */
+  export type AirportCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AirportCountOutputType
+     */
+    select?: AirportCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * AirportCountOutputType without action
+   */
+  export type AirportCountOutputTypeCountDepartureArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FlightWhereInput
+  }
+
+  /**
+   * AirportCountOutputType without action
+   */
+  export type AirportCountOutputTypeCountArrivalArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FlightWhereInput
+  }
+
+
+  /**
    * Models
    */
 
@@ -4295,6 +4335,9 @@ export namespace Prisma {
     address?: boolean
     cityId?: boolean
     city?: boolean | CityDefaultArgs<ExtArgs>
+    departure?: boolean | Airport$departureArgs<ExtArgs>
+    arrival?: boolean | Airport$arrivalArgs<ExtArgs>
+    _count?: boolean | AirportCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["airport"]>
 
   export type AirportSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4316,6 +4359,9 @@ export namespace Prisma {
 
   export type AirportInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     city?: boolean | CityDefaultArgs<ExtArgs>
+    departure?: boolean | Airport$departureArgs<ExtArgs>
+    arrival?: boolean | Airport$arrivalArgs<ExtArgs>
+    _count?: boolean | AirportCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type AirportIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     city?: boolean | CityDefaultArgs<ExtArgs>
@@ -4325,6 +4371,8 @@ export namespace Prisma {
     name: "Airport"
     objects: {
       city: Prisma.$CityPayload<ExtArgs>
+      departure: Prisma.$FlightPayload<ExtArgs>[]
+      arrival: Prisma.$FlightPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -4697,6 +4745,8 @@ export namespace Prisma {
   export interface Prisma__AirportClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     city<T extends CityDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CityDefaultArgs<ExtArgs>>): Prisma__CityClient<$Result.GetResult<Prisma.$CityPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    departure<T extends Airport$departureArgs<ExtArgs> = {}>(args?: Subset<T, Airport$departureArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FlightPayload<ExtArgs>, T, "findMany"> | Null>
+    arrival<T extends Airport$arrivalArgs<ExtArgs> = {}>(args?: Subset<T, Airport$arrivalArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FlightPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5049,6 +5099,46 @@ export namespace Prisma {
   }
 
   /**
+   * Airport.departure
+   */
+  export type Airport$departureArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Flight
+     */
+    select?: FlightSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlightInclude<ExtArgs> | null
+    where?: FlightWhereInput
+    orderBy?: FlightOrderByWithRelationInput | FlightOrderByWithRelationInput[]
+    cursor?: FlightWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FlightScalarFieldEnum | FlightScalarFieldEnum[]
+  }
+
+  /**
+   * Airport.arrival
+   */
+  export type Airport$arrivalArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Flight
+     */
+    select?: FlightSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlightInclude<ExtArgs> | null
+    where?: FlightWhereInput
+    orderBy?: FlightOrderByWithRelationInput | FlightOrderByWithRelationInput[]
+    cursor?: FlightWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FlightScalarFieldEnum | FlightScalarFieldEnum[]
+  }
+
+  /**
    * Airport without action
    */
   export type AirportDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5330,6 +5420,8 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     airplane?: boolean | AirplaneDefaultArgs<ExtArgs>
+    departureAirport?: boolean | AirportDefaultArgs<ExtArgs>
+    arrivalAirport?: boolean | AirportDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["flight"]>
 
   export type FlightSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -5346,6 +5438,8 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     airplane?: boolean | AirplaneDefaultArgs<ExtArgs>
+    departureAirport?: boolean | AirportDefaultArgs<ExtArgs>
+    arrivalAirport?: boolean | AirportDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["flight"]>
 
   export type FlightSelectScalar = {
@@ -5365,15 +5459,21 @@ export namespace Prisma {
 
   export type FlightInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     airplane?: boolean | AirplaneDefaultArgs<ExtArgs>
+    departureAirport?: boolean | AirportDefaultArgs<ExtArgs>
+    arrivalAirport?: boolean | AirportDefaultArgs<ExtArgs>
   }
   export type FlightIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     airplane?: boolean | AirplaneDefaultArgs<ExtArgs>
+    departureAirport?: boolean | AirportDefaultArgs<ExtArgs>
+    arrivalAirport?: boolean | AirportDefaultArgs<ExtArgs>
   }
 
   export type $FlightPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Flight"
     objects: {
       airplane: Prisma.$AirplanePayload<ExtArgs>
+      departureAirport: Prisma.$AirportPayload<ExtArgs>
+      arrivalAirport: Prisma.$AirportPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -5753,6 +5853,8 @@ export namespace Prisma {
   export interface Prisma__FlightClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     airplane<T extends AirplaneDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AirplaneDefaultArgs<ExtArgs>>): Prisma__AirplaneClient<$Result.GetResult<Prisma.$AirplanePayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    departureAirport<T extends AirportDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AirportDefaultArgs<ExtArgs>>): Prisma__AirportClient<$Result.GetResult<Prisma.$AirportPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    arrivalAirport<T extends AirportDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AirportDefaultArgs<ExtArgs>>): Prisma__AirportClient<$Result.GetResult<Prisma.$AirportPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6450,6 +6552,8 @@ export namespace Prisma {
     address?: StringNullableFilter<"Airport"> | string | null
     cityId?: IntFilter<"Airport"> | number
     city?: XOR<CityRelationFilter, CityWhereInput>
+    departure?: FlightListRelationFilter
+    arrival?: FlightListRelationFilter
   }
 
   export type AirportOrderByWithRelationInput = {
@@ -6459,6 +6563,8 @@ export namespace Prisma {
     address?: SortOrderInput | SortOrder
     cityId?: SortOrder
     city?: CityOrderByWithRelationInput
+    departure?: FlightOrderByRelationAggregateInput
+    arrival?: FlightOrderByRelationAggregateInput
   }
 
   export type AirportWhereUniqueInput = Prisma.AtLeast<{
@@ -6471,6 +6577,8 @@ export namespace Prisma {
     address?: StringNullableFilter<"Airport"> | string | null
     cityId?: IntFilter<"Airport"> | number
     city?: XOR<CityRelationFilter, CityWhereInput>
+    departure?: FlightListRelationFilter
+    arrival?: FlightListRelationFilter
   }, "id" | "name" | "code">
 
   export type AirportOrderByWithAggregationInput = {
@@ -6514,6 +6622,8 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Flight"> | Date | string
     updatedAt?: DateTimeFilter<"Flight"> | Date | string
     airplane?: XOR<AirplaneRelationFilter, AirplaneWhereInput>
+    departureAirport?: XOR<AirportRelationFilter, AirportWhereInput>
+    arrivalAirport?: XOR<AirportRelationFilter, AirportWhereInput>
   }
 
   export type FlightOrderByWithRelationInput = {
@@ -6530,6 +6640,8 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     airplane?: AirplaneOrderByWithRelationInput
+    departureAirport?: AirportOrderByWithRelationInput
+    arrivalAirport?: AirportOrderByWithRelationInput
   }
 
   export type FlightWhereUniqueInput = Prisma.AtLeast<{
@@ -6549,6 +6661,8 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Flight"> | Date | string
     updatedAt?: DateTimeFilter<"Flight"> | Date | string
     airplane?: XOR<AirplaneRelationFilter, AirplaneWhereInput>
+    departureAirport?: XOR<AirportRelationFilter, AirportWhereInput>
+    arrivalAirport?: XOR<AirportRelationFilter, AirportWhereInput>
   }, "id">
 
   export type FlightOrderByWithAggregationInput = {
@@ -6740,6 +6854,8 @@ export namespace Prisma {
     code: string
     address?: string | null
     city: CityCreateNestedOneWithoutAirportsInput
+    departure?: FlightCreateNestedManyWithoutDepartureAirportInput
+    arrival?: FlightCreateNestedManyWithoutArrivalAirportInput
   }
 
   export type AirportUncheckedCreateInput = {
@@ -6748,6 +6864,8 @@ export namespace Prisma {
     code: string
     address?: string | null
     cityId: number
+    departure?: FlightUncheckedCreateNestedManyWithoutDepartureAirportInput
+    arrival?: FlightUncheckedCreateNestedManyWithoutArrivalAirportInput
   }
 
   export type AirportUpdateInput = {
@@ -6755,6 +6873,8 @@ export namespace Prisma {
     code?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
     city?: CityUpdateOneRequiredWithoutAirportsNestedInput
+    departure?: FlightUpdateManyWithoutDepartureAirportNestedInput
+    arrival?: FlightUpdateManyWithoutArrivalAirportNestedInput
   }
 
   export type AirportUncheckedUpdateInput = {
@@ -6763,6 +6883,8 @@ export namespace Prisma {
     code?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
     cityId?: IntFieldUpdateOperationsInput | number
+    departure?: FlightUncheckedUpdateManyWithoutDepartureAirportNestedInput
+    arrival?: FlightUncheckedUpdateManyWithoutArrivalAirportNestedInput
   }
 
   export type AirportCreateManyInput = {
@@ -6789,8 +6911,6 @@ export namespace Prisma {
 
   export type FlightCreateInput = {
     flightNumber: string
-    departureAirportId: string
-    arrivalAirportId: string
     arrivalTime: Date | string
     departureTime: Date | string
     price: number
@@ -6799,6 +6919,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     airplane: AirplaneCreateNestedOneWithoutFlightInput
+    departureAirport: AirportCreateNestedOneWithoutDepartureInput
+    arrivalAirport: AirportCreateNestedOneWithoutArrivalInput
   }
 
   export type FlightUncheckedCreateInput = {
@@ -6818,8 +6940,6 @@ export namespace Prisma {
 
   export type FlightUpdateInput = {
     flightNumber?: StringFieldUpdateOperationsInput | string
-    departureAirportId?: StringFieldUpdateOperationsInput | string
-    arrivalAirportId?: StringFieldUpdateOperationsInput | string
     arrivalTime?: DateTimeFieldUpdateOperationsInput | Date | string
     departureTime?: DateTimeFieldUpdateOperationsInput | Date | string
     price?: IntFieldUpdateOperationsInput | number
@@ -6828,6 +6948,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     airplane?: AirplaneUpdateOneRequiredWithoutFlightNestedInput
+    departureAirport?: AirportUpdateOneRequiredWithoutDepartureNestedInput
+    arrivalAirport?: AirportUpdateOneRequiredWithoutArrivalNestedInput
   }
 
   export type FlightUncheckedUpdateInput = {
@@ -6862,8 +6984,6 @@ export namespace Prisma {
 
   export type FlightUpdateManyMutationInput = {
     flightNumber?: StringFieldUpdateOperationsInput | string
-    departureAirportId?: StringFieldUpdateOperationsInput | string
-    arrivalAirportId?: StringFieldUpdateOperationsInput | string
     arrivalTime?: DateTimeFieldUpdateOperationsInput | Date | string
     departureTime?: DateTimeFieldUpdateOperationsInput | Date | string
     price?: IntFieldUpdateOperationsInput | number
@@ -7164,6 +7284,11 @@ export namespace Prisma {
     isNot?: AirplaneWhereInput
   }
 
+  export type AirportRelationFilter = {
+    is?: AirportWhereInput
+    isNot?: AirportWhereInput
+  }
+
   export type FlightCountOrderByAggregateInput = {
     id?: SortOrder
     flightNumber?: SortOrder
@@ -7333,6 +7458,34 @@ export namespace Prisma {
     connect?: CityWhereUniqueInput
   }
 
+  export type FlightCreateNestedManyWithoutDepartureAirportInput = {
+    create?: XOR<FlightCreateWithoutDepartureAirportInput, FlightUncheckedCreateWithoutDepartureAirportInput> | FlightCreateWithoutDepartureAirportInput[] | FlightUncheckedCreateWithoutDepartureAirportInput[]
+    connectOrCreate?: FlightCreateOrConnectWithoutDepartureAirportInput | FlightCreateOrConnectWithoutDepartureAirportInput[]
+    createMany?: FlightCreateManyDepartureAirportInputEnvelope
+    connect?: FlightWhereUniqueInput | FlightWhereUniqueInput[]
+  }
+
+  export type FlightCreateNestedManyWithoutArrivalAirportInput = {
+    create?: XOR<FlightCreateWithoutArrivalAirportInput, FlightUncheckedCreateWithoutArrivalAirportInput> | FlightCreateWithoutArrivalAirportInput[] | FlightUncheckedCreateWithoutArrivalAirportInput[]
+    connectOrCreate?: FlightCreateOrConnectWithoutArrivalAirportInput | FlightCreateOrConnectWithoutArrivalAirportInput[]
+    createMany?: FlightCreateManyArrivalAirportInputEnvelope
+    connect?: FlightWhereUniqueInput | FlightWhereUniqueInput[]
+  }
+
+  export type FlightUncheckedCreateNestedManyWithoutDepartureAirportInput = {
+    create?: XOR<FlightCreateWithoutDepartureAirportInput, FlightUncheckedCreateWithoutDepartureAirportInput> | FlightCreateWithoutDepartureAirportInput[] | FlightUncheckedCreateWithoutDepartureAirportInput[]
+    connectOrCreate?: FlightCreateOrConnectWithoutDepartureAirportInput | FlightCreateOrConnectWithoutDepartureAirportInput[]
+    createMany?: FlightCreateManyDepartureAirportInputEnvelope
+    connect?: FlightWhereUniqueInput | FlightWhereUniqueInput[]
+  }
+
+  export type FlightUncheckedCreateNestedManyWithoutArrivalAirportInput = {
+    create?: XOR<FlightCreateWithoutArrivalAirportInput, FlightUncheckedCreateWithoutArrivalAirportInput> | FlightCreateWithoutArrivalAirportInput[] | FlightUncheckedCreateWithoutArrivalAirportInput[]
+    connectOrCreate?: FlightCreateOrConnectWithoutArrivalAirportInput | FlightCreateOrConnectWithoutArrivalAirportInput[]
+    createMany?: FlightCreateManyArrivalAirportInputEnvelope
+    connect?: FlightWhereUniqueInput | FlightWhereUniqueInput[]
+  }
+
   export type CityUpdateOneRequiredWithoutAirportsNestedInput = {
     create?: XOR<CityCreateWithoutAirportsInput, CityUncheckedCreateWithoutAirportsInput>
     connectOrCreate?: CityCreateOrConnectWithoutAirportsInput
@@ -7341,10 +7494,78 @@ export namespace Prisma {
     update?: XOR<XOR<CityUpdateToOneWithWhereWithoutAirportsInput, CityUpdateWithoutAirportsInput>, CityUncheckedUpdateWithoutAirportsInput>
   }
 
+  export type FlightUpdateManyWithoutDepartureAirportNestedInput = {
+    create?: XOR<FlightCreateWithoutDepartureAirportInput, FlightUncheckedCreateWithoutDepartureAirportInput> | FlightCreateWithoutDepartureAirportInput[] | FlightUncheckedCreateWithoutDepartureAirportInput[]
+    connectOrCreate?: FlightCreateOrConnectWithoutDepartureAirportInput | FlightCreateOrConnectWithoutDepartureAirportInput[]
+    upsert?: FlightUpsertWithWhereUniqueWithoutDepartureAirportInput | FlightUpsertWithWhereUniqueWithoutDepartureAirportInput[]
+    createMany?: FlightCreateManyDepartureAirportInputEnvelope
+    set?: FlightWhereUniqueInput | FlightWhereUniqueInput[]
+    disconnect?: FlightWhereUniqueInput | FlightWhereUniqueInput[]
+    delete?: FlightWhereUniqueInput | FlightWhereUniqueInput[]
+    connect?: FlightWhereUniqueInput | FlightWhereUniqueInput[]
+    update?: FlightUpdateWithWhereUniqueWithoutDepartureAirportInput | FlightUpdateWithWhereUniqueWithoutDepartureAirportInput[]
+    updateMany?: FlightUpdateManyWithWhereWithoutDepartureAirportInput | FlightUpdateManyWithWhereWithoutDepartureAirportInput[]
+    deleteMany?: FlightScalarWhereInput | FlightScalarWhereInput[]
+  }
+
+  export type FlightUpdateManyWithoutArrivalAirportNestedInput = {
+    create?: XOR<FlightCreateWithoutArrivalAirportInput, FlightUncheckedCreateWithoutArrivalAirportInput> | FlightCreateWithoutArrivalAirportInput[] | FlightUncheckedCreateWithoutArrivalAirportInput[]
+    connectOrCreate?: FlightCreateOrConnectWithoutArrivalAirportInput | FlightCreateOrConnectWithoutArrivalAirportInput[]
+    upsert?: FlightUpsertWithWhereUniqueWithoutArrivalAirportInput | FlightUpsertWithWhereUniqueWithoutArrivalAirportInput[]
+    createMany?: FlightCreateManyArrivalAirportInputEnvelope
+    set?: FlightWhereUniqueInput | FlightWhereUniqueInput[]
+    disconnect?: FlightWhereUniqueInput | FlightWhereUniqueInput[]
+    delete?: FlightWhereUniqueInput | FlightWhereUniqueInput[]
+    connect?: FlightWhereUniqueInput | FlightWhereUniqueInput[]
+    update?: FlightUpdateWithWhereUniqueWithoutArrivalAirportInput | FlightUpdateWithWhereUniqueWithoutArrivalAirportInput[]
+    updateMany?: FlightUpdateManyWithWhereWithoutArrivalAirportInput | FlightUpdateManyWithWhereWithoutArrivalAirportInput[]
+    deleteMany?: FlightScalarWhereInput | FlightScalarWhereInput[]
+  }
+
+  export type FlightUncheckedUpdateManyWithoutDepartureAirportNestedInput = {
+    create?: XOR<FlightCreateWithoutDepartureAirportInput, FlightUncheckedCreateWithoutDepartureAirportInput> | FlightCreateWithoutDepartureAirportInput[] | FlightUncheckedCreateWithoutDepartureAirportInput[]
+    connectOrCreate?: FlightCreateOrConnectWithoutDepartureAirportInput | FlightCreateOrConnectWithoutDepartureAirportInput[]
+    upsert?: FlightUpsertWithWhereUniqueWithoutDepartureAirportInput | FlightUpsertWithWhereUniqueWithoutDepartureAirportInput[]
+    createMany?: FlightCreateManyDepartureAirportInputEnvelope
+    set?: FlightWhereUniqueInput | FlightWhereUniqueInput[]
+    disconnect?: FlightWhereUniqueInput | FlightWhereUniqueInput[]
+    delete?: FlightWhereUniqueInput | FlightWhereUniqueInput[]
+    connect?: FlightWhereUniqueInput | FlightWhereUniqueInput[]
+    update?: FlightUpdateWithWhereUniqueWithoutDepartureAirportInput | FlightUpdateWithWhereUniqueWithoutDepartureAirportInput[]
+    updateMany?: FlightUpdateManyWithWhereWithoutDepartureAirportInput | FlightUpdateManyWithWhereWithoutDepartureAirportInput[]
+    deleteMany?: FlightScalarWhereInput | FlightScalarWhereInput[]
+  }
+
+  export type FlightUncheckedUpdateManyWithoutArrivalAirportNestedInput = {
+    create?: XOR<FlightCreateWithoutArrivalAirportInput, FlightUncheckedCreateWithoutArrivalAirportInput> | FlightCreateWithoutArrivalAirportInput[] | FlightUncheckedCreateWithoutArrivalAirportInput[]
+    connectOrCreate?: FlightCreateOrConnectWithoutArrivalAirportInput | FlightCreateOrConnectWithoutArrivalAirportInput[]
+    upsert?: FlightUpsertWithWhereUniqueWithoutArrivalAirportInput | FlightUpsertWithWhereUniqueWithoutArrivalAirportInput[]
+    createMany?: FlightCreateManyArrivalAirportInputEnvelope
+    set?: FlightWhereUniqueInput | FlightWhereUniqueInput[]
+    disconnect?: FlightWhereUniqueInput | FlightWhereUniqueInput[]
+    delete?: FlightWhereUniqueInput | FlightWhereUniqueInput[]
+    connect?: FlightWhereUniqueInput | FlightWhereUniqueInput[]
+    update?: FlightUpdateWithWhereUniqueWithoutArrivalAirportInput | FlightUpdateWithWhereUniqueWithoutArrivalAirportInput[]
+    updateMany?: FlightUpdateManyWithWhereWithoutArrivalAirportInput | FlightUpdateManyWithWhereWithoutArrivalAirportInput[]
+    deleteMany?: FlightScalarWhereInput | FlightScalarWhereInput[]
+  }
+
   export type AirplaneCreateNestedOneWithoutFlightInput = {
     create?: XOR<AirplaneCreateWithoutFlightInput, AirplaneUncheckedCreateWithoutFlightInput>
     connectOrCreate?: AirplaneCreateOrConnectWithoutFlightInput
     connect?: AirplaneWhereUniqueInput
+  }
+
+  export type AirportCreateNestedOneWithoutDepartureInput = {
+    create?: XOR<AirportCreateWithoutDepartureInput, AirportUncheckedCreateWithoutDepartureInput>
+    connectOrCreate?: AirportCreateOrConnectWithoutDepartureInput
+    connect?: AirportWhereUniqueInput
+  }
+
+  export type AirportCreateNestedOneWithoutArrivalInput = {
+    create?: XOR<AirportCreateWithoutArrivalInput, AirportUncheckedCreateWithoutArrivalInput>
+    connectOrCreate?: AirportCreateOrConnectWithoutArrivalInput
+    connect?: AirportWhereUniqueInput
   }
 
   export type AirplaneUpdateOneRequiredWithoutFlightNestedInput = {
@@ -7353,6 +7574,22 @@ export namespace Prisma {
     upsert?: AirplaneUpsertWithoutFlightInput
     connect?: AirplaneWhereUniqueInput
     update?: XOR<XOR<AirplaneUpdateToOneWithWhereWithoutFlightInput, AirplaneUpdateWithoutFlightInput>, AirplaneUncheckedUpdateWithoutFlightInput>
+  }
+
+  export type AirportUpdateOneRequiredWithoutDepartureNestedInput = {
+    create?: XOR<AirportCreateWithoutDepartureInput, AirportUncheckedCreateWithoutDepartureInput>
+    connectOrCreate?: AirportCreateOrConnectWithoutDepartureInput
+    upsert?: AirportUpsertWithoutDepartureInput
+    connect?: AirportWhereUniqueInput
+    update?: XOR<XOR<AirportUpdateToOneWithWhereWithoutDepartureInput, AirportUpdateWithoutDepartureInput>, AirportUncheckedUpdateWithoutDepartureInput>
+  }
+
+  export type AirportUpdateOneRequiredWithoutArrivalNestedInput = {
+    create?: XOR<AirportCreateWithoutArrivalInput, AirportUncheckedCreateWithoutArrivalInput>
+    connectOrCreate?: AirportCreateOrConnectWithoutArrivalInput
+    upsert?: AirportUpsertWithoutArrivalInput
+    connect?: AirportWhereUniqueInput
+    update?: XOR<XOR<AirportUpdateToOneWithWhereWithoutArrivalInput, AirportUpdateWithoutArrivalInput>, AirportUncheckedUpdateWithoutArrivalInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -7493,8 +7730,6 @@ export namespace Prisma {
 
   export type FlightCreateWithoutAirplaneInput = {
     flightNumber: string
-    departureAirportId: string
-    arrivalAirportId: string
     arrivalTime: Date | string
     departureTime: Date | string
     price: number
@@ -7502,6 +7737,8 @@ export namespace Prisma {
     totalSeats: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    departureAirport: AirportCreateNestedOneWithoutDepartureInput
+    arrivalAirport: AirportCreateNestedOneWithoutArrivalInput
   }
 
   export type FlightUncheckedCreateWithoutAirplaneInput = {
@@ -7566,6 +7803,8 @@ export namespace Prisma {
     name: string
     code: string
     address?: string | null
+    departure?: FlightCreateNestedManyWithoutDepartureAirportInput
+    arrival?: FlightCreateNestedManyWithoutArrivalAirportInput
   }
 
   export type AirportUncheckedCreateWithoutCityInput = {
@@ -7573,6 +7812,8 @@ export namespace Prisma {
     name: string
     code: string
     address?: string | null
+    departure?: FlightUncheckedCreateNestedManyWithoutDepartureAirportInput
+    arrival?: FlightUncheckedCreateNestedManyWithoutArrivalAirportInput
   }
 
   export type AirportCreateOrConnectWithoutCityInput = {
@@ -7626,6 +7867,80 @@ export namespace Prisma {
     create: XOR<CityCreateWithoutAirportsInput, CityUncheckedCreateWithoutAirportsInput>
   }
 
+  export type FlightCreateWithoutDepartureAirportInput = {
+    flightNumber: string
+    arrivalTime: Date | string
+    departureTime: Date | string
+    price: number
+    boardingGate?: string | null
+    totalSeats: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    airplane: AirplaneCreateNestedOneWithoutFlightInput
+    arrivalAirport: AirportCreateNestedOneWithoutArrivalInput
+  }
+
+  export type FlightUncheckedCreateWithoutDepartureAirportInput = {
+    id?: number
+    flightNumber: string
+    airplaneId: number
+    arrivalAirportId: string
+    arrivalTime: Date | string
+    departureTime: Date | string
+    price: number
+    boardingGate?: string | null
+    totalSeats: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FlightCreateOrConnectWithoutDepartureAirportInput = {
+    where: FlightWhereUniqueInput
+    create: XOR<FlightCreateWithoutDepartureAirportInput, FlightUncheckedCreateWithoutDepartureAirportInput>
+  }
+
+  export type FlightCreateManyDepartureAirportInputEnvelope = {
+    data: FlightCreateManyDepartureAirportInput | FlightCreateManyDepartureAirportInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type FlightCreateWithoutArrivalAirportInput = {
+    flightNumber: string
+    arrivalTime: Date | string
+    departureTime: Date | string
+    price: number
+    boardingGate?: string | null
+    totalSeats: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    airplane: AirplaneCreateNestedOneWithoutFlightInput
+    departureAirport: AirportCreateNestedOneWithoutDepartureInput
+  }
+
+  export type FlightUncheckedCreateWithoutArrivalAirportInput = {
+    id?: number
+    flightNumber: string
+    airplaneId: number
+    departureAirportId: string
+    arrivalTime: Date | string
+    departureTime: Date | string
+    price: number
+    boardingGate?: string | null
+    totalSeats: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FlightCreateOrConnectWithoutArrivalAirportInput = {
+    where: FlightWhereUniqueInput
+    create: XOR<FlightCreateWithoutArrivalAirportInput, FlightUncheckedCreateWithoutArrivalAirportInput>
+  }
+
+  export type FlightCreateManyArrivalAirportInputEnvelope = {
+    data: FlightCreateManyArrivalAirportInput | FlightCreateManyArrivalAirportInput[]
+    skipDuplicates?: boolean
+  }
+
   export type CityUpsertWithoutAirportsInput = {
     update: XOR<CityUpdateWithoutAirportsInput, CityUncheckedUpdateWithoutAirportsInput>
     create: XOR<CityCreateWithoutAirportsInput, CityUncheckedCreateWithoutAirportsInput>
@@ -7646,6 +7961,38 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
   }
 
+  export type FlightUpsertWithWhereUniqueWithoutDepartureAirportInput = {
+    where: FlightWhereUniqueInput
+    update: XOR<FlightUpdateWithoutDepartureAirportInput, FlightUncheckedUpdateWithoutDepartureAirportInput>
+    create: XOR<FlightCreateWithoutDepartureAirportInput, FlightUncheckedCreateWithoutDepartureAirportInput>
+  }
+
+  export type FlightUpdateWithWhereUniqueWithoutDepartureAirportInput = {
+    where: FlightWhereUniqueInput
+    data: XOR<FlightUpdateWithoutDepartureAirportInput, FlightUncheckedUpdateWithoutDepartureAirportInput>
+  }
+
+  export type FlightUpdateManyWithWhereWithoutDepartureAirportInput = {
+    where: FlightScalarWhereInput
+    data: XOR<FlightUpdateManyMutationInput, FlightUncheckedUpdateManyWithoutDepartureAirportInput>
+  }
+
+  export type FlightUpsertWithWhereUniqueWithoutArrivalAirportInput = {
+    where: FlightWhereUniqueInput
+    update: XOR<FlightUpdateWithoutArrivalAirportInput, FlightUncheckedUpdateWithoutArrivalAirportInput>
+    create: XOR<FlightCreateWithoutArrivalAirportInput, FlightUncheckedCreateWithoutArrivalAirportInput>
+  }
+
+  export type FlightUpdateWithWhereUniqueWithoutArrivalAirportInput = {
+    where: FlightWhereUniqueInput
+    data: XOR<FlightUpdateWithoutArrivalAirportInput, FlightUncheckedUpdateWithoutArrivalAirportInput>
+  }
+
+  export type FlightUpdateManyWithWhereWithoutArrivalAirportInput = {
+    where: FlightScalarWhereInput
+    data: XOR<FlightUpdateManyMutationInput, FlightUncheckedUpdateManyWithoutArrivalAirportInput>
+  }
+
   export type AirplaneCreateWithoutFlightInput = {
     modelNumber: string
     capacity?: number
@@ -7664,6 +8011,50 @@ export namespace Prisma {
   export type AirplaneCreateOrConnectWithoutFlightInput = {
     where: AirplaneWhereUniqueInput
     create: XOR<AirplaneCreateWithoutFlightInput, AirplaneUncheckedCreateWithoutFlightInput>
+  }
+
+  export type AirportCreateWithoutDepartureInput = {
+    name: string
+    code: string
+    address?: string | null
+    city: CityCreateNestedOneWithoutAirportsInput
+    arrival?: FlightCreateNestedManyWithoutArrivalAirportInput
+  }
+
+  export type AirportUncheckedCreateWithoutDepartureInput = {
+    id?: number
+    name: string
+    code: string
+    address?: string | null
+    cityId: number
+    arrival?: FlightUncheckedCreateNestedManyWithoutArrivalAirportInput
+  }
+
+  export type AirportCreateOrConnectWithoutDepartureInput = {
+    where: AirportWhereUniqueInput
+    create: XOR<AirportCreateWithoutDepartureInput, AirportUncheckedCreateWithoutDepartureInput>
+  }
+
+  export type AirportCreateWithoutArrivalInput = {
+    name: string
+    code: string
+    address?: string | null
+    city: CityCreateNestedOneWithoutAirportsInput
+    departure?: FlightCreateNestedManyWithoutDepartureAirportInput
+  }
+
+  export type AirportUncheckedCreateWithoutArrivalInput = {
+    id?: number
+    name: string
+    code: string
+    address?: string | null
+    cityId: number
+    departure?: FlightUncheckedCreateNestedManyWithoutDepartureAirportInput
+  }
+
+  export type AirportCreateOrConnectWithoutArrivalInput = {
+    where: AirportWhereUniqueInput
+    create: XOR<AirportCreateWithoutArrivalInput, AirportUncheckedCreateWithoutArrivalInput>
   }
 
   export type AirplaneUpsertWithoutFlightInput = {
@@ -7692,6 +8083,62 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type AirportUpsertWithoutDepartureInput = {
+    update: XOR<AirportUpdateWithoutDepartureInput, AirportUncheckedUpdateWithoutDepartureInput>
+    create: XOR<AirportCreateWithoutDepartureInput, AirportUncheckedCreateWithoutDepartureInput>
+    where?: AirportWhereInput
+  }
+
+  export type AirportUpdateToOneWithWhereWithoutDepartureInput = {
+    where?: AirportWhereInput
+    data: XOR<AirportUpdateWithoutDepartureInput, AirportUncheckedUpdateWithoutDepartureInput>
+  }
+
+  export type AirportUpdateWithoutDepartureInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: CityUpdateOneRequiredWithoutAirportsNestedInput
+    arrival?: FlightUpdateManyWithoutArrivalAirportNestedInput
+  }
+
+  export type AirportUncheckedUpdateWithoutDepartureInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    cityId?: IntFieldUpdateOperationsInput | number
+    arrival?: FlightUncheckedUpdateManyWithoutArrivalAirportNestedInput
+  }
+
+  export type AirportUpsertWithoutArrivalInput = {
+    update: XOR<AirportUpdateWithoutArrivalInput, AirportUncheckedUpdateWithoutArrivalInput>
+    create: XOR<AirportCreateWithoutArrivalInput, AirportUncheckedCreateWithoutArrivalInput>
+    where?: AirportWhereInput
+  }
+
+  export type AirportUpdateToOneWithWhereWithoutArrivalInput = {
+    where?: AirportWhereInput
+    data: XOR<AirportUpdateWithoutArrivalInput, AirportUncheckedUpdateWithoutArrivalInput>
+  }
+
+  export type AirportUpdateWithoutArrivalInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: CityUpdateOneRequiredWithoutAirportsNestedInput
+    departure?: FlightUpdateManyWithoutDepartureAirportNestedInput
+  }
+
+  export type AirportUncheckedUpdateWithoutArrivalInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    cityId?: IntFieldUpdateOperationsInput | number
+    departure?: FlightUncheckedUpdateManyWithoutDepartureAirportNestedInput
+  }
+
   export type FlightCreateManyAirplaneInput = {
     id?: number
     flightNumber: string
@@ -7708,8 +8155,6 @@ export namespace Prisma {
 
   export type FlightUpdateWithoutAirplaneInput = {
     flightNumber?: StringFieldUpdateOperationsInput | string
-    departureAirportId?: StringFieldUpdateOperationsInput | string
-    arrivalAirportId?: StringFieldUpdateOperationsInput | string
     arrivalTime?: DateTimeFieldUpdateOperationsInput | Date | string
     departureTime?: DateTimeFieldUpdateOperationsInput | Date | string
     price?: IntFieldUpdateOperationsInput | number
@@ -7717,6 +8162,8 @@ export namespace Prisma {
     totalSeats?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    departureAirport?: AirportUpdateOneRequiredWithoutDepartureNestedInput
+    arrivalAirport?: AirportUpdateOneRequiredWithoutArrivalNestedInput
   }
 
   export type FlightUncheckedUpdateWithoutAirplaneInput = {
@@ -7758,6 +8205,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    departure?: FlightUpdateManyWithoutDepartureAirportNestedInput
+    arrival?: FlightUpdateManyWithoutArrivalAirportNestedInput
   }
 
   export type AirportUncheckedUpdateWithoutCityInput = {
@@ -7765,6 +8214,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    departure?: FlightUncheckedUpdateManyWithoutDepartureAirportNestedInput
+    arrival?: FlightUncheckedUpdateManyWithoutArrivalAirportNestedInput
   }
 
   export type AirportUncheckedUpdateManyWithoutCityInput = {
@@ -7772,6 +8223,116 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type FlightCreateManyDepartureAirportInput = {
+    id?: number
+    flightNumber: string
+    airplaneId: number
+    arrivalAirportId: string
+    arrivalTime: Date | string
+    departureTime: Date | string
+    price: number
+    boardingGate?: string | null
+    totalSeats: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FlightCreateManyArrivalAirportInput = {
+    id?: number
+    flightNumber: string
+    airplaneId: number
+    departureAirportId: string
+    arrivalTime: Date | string
+    departureTime: Date | string
+    price: number
+    boardingGate?: string | null
+    totalSeats: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FlightUpdateWithoutDepartureAirportInput = {
+    flightNumber?: StringFieldUpdateOperationsInput | string
+    arrivalTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    departureTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    price?: IntFieldUpdateOperationsInput | number
+    boardingGate?: NullableStringFieldUpdateOperationsInput | string | null
+    totalSeats?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    airplane?: AirplaneUpdateOneRequiredWithoutFlightNestedInput
+    arrivalAirport?: AirportUpdateOneRequiredWithoutArrivalNestedInput
+  }
+
+  export type FlightUncheckedUpdateWithoutDepartureAirportInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    flightNumber?: StringFieldUpdateOperationsInput | string
+    airplaneId?: IntFieldUpdateOperationsInput | number
+    arrivalAirportId?: StringFieldUpdateOperationsInput | string
+    arrivalTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    departureTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    price?: IntFieldUpdateOperationsInput | number
+    boardingGate?: NullableStringFieldUpdateOperationsInput | string | null
+    totalSeats?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FlightUncheckedUpdateManyWithoutDepartureAirportInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    flightNumber?: StringFieldUpdateOperationsInput | string
+    airplaneId?: IntFieldUpdateOperationsInput | number
+    arrivalAirportId?: StringFieldUpdateOperationsInput | string
+    arrivalTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    departureTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    price?: IntFieldUpdateOperationsInput | number
+    boardingGate?: NullableStringFieldUpdateOperationsInput | string | null
+    totalSeats?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FlightUpdateWithoutArrivalAirportInput = {
+    flightNumber?: StringFieldUpdateOperationsInput | string
+    arrivalTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    departureTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    price?: IntFieldUpdateOperationsInput | number
+    boardingGate?: NullableStringFieldUpdateOperationsInput | string | null
+    totalSeats?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    airplane?: AirplaneUpdateOneRequiredWithoutFlightNestedInput
+    departureAirport?: AirportUpdateOneRequiredWithoutDepartureNestedInput
+  }
+
+  export type FlightUncheckedUpdateWithoutArrivalAirportInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    flightNumber?: StringFieldUpdateOperationsInput | string
+    airplaneId?: IntFieldUpdateOperationsInput | number
+    departureAirportId?: StringFieldUpdateOperationsInput | string
+    arrivalTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    departureTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    price?: IntFieldUpdateOperationsInput | number
+    boardingGate?: NullableStringFieldUpdateOperationsInput | string | null
+    totalSeats?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FlightUncheckedUpdateManyWithoutArrivalAirportInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    flightNumber?: StringFieldUpdateOperationsInput | string
+    airplaneId?: IntFieldUpdateOperationsInput | number
+    departureAirportId?: StringFieldUpdateOperationsInput | string
+    arrivalTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    departureTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    price?: IntFieldUpdateOperationsInput | number
+    boardingGate?: NullableStringFieldUpdateOperationsInput | string | null
+    totalSeats?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 
@@ -7787,6 +8348,10 @@ export namespace Prisma {
      * @deprecated Use CityCountOutputTypeDefaultArgs instead
      */
     export type CityCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = CityCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use AirportCountOutputTypeDefaultArgs instead
+     */
+    export type AirportCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = AirportCountOutputTypeDefaultArgs<ExtArgs>
     /**
      * @deprecated Use UserDefaultArgs instead
      */

@@ -33,21 +33,26 @@ model City {
 }
 
 model Airport {
-  id      Int     @id @default(autoincrement())
-  name    String  @unique
-  code    String  @unique
-  address String? // removed unique unless needed
-  cityId  Int
-  city    City    @relation(fields: [cityId], references: [id], onDelete: Cascade)
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  code      String   @unique
+  address   String? // removed unique unless needed
+  cityId    Int
+  city      City     @relation(fields: [cityId], references: [id], onDelete: Cascade)
+  departure Flight[] @relation("DepartureAirport")
+  arrival   Flight[] @relation("ArrivalAirport")
 
   @@index([cityId])
 }
 
 model Flight {
-  id                 Int      @id @default(autoincrement())
-  flightNumber       String // varchar(255) NOT NULL
-  airplaneId         Int // int NOT NULL
-  airplane           Airplane @relation(fields: [airplaneId], references: [id])
+  id               Int      @id @default(autoincrement())
+  flightNumber     String // varchar(255) NOT NULL
+  airplaneId       Int // int NOT NULL
+  airplane         Airplane @relation(fields: [airplaneId], references: [id])
+  departureAirport Airport  @relation("DepartureAirport", fields: [departureAirportId], references: [code])
+  arrivalAirport   Airport  @relation("ArrivalAirport", fields: [arrivalAirportId], references: [code])
+
   departureAirportId String // varchar(255) NOT NULL
   arrivalAirportId   String // varchar(255) NOT NULL
   arrivalTime        DateTime // datetime NOT NULL
