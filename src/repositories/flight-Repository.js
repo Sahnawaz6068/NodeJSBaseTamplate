@@ -15,7 +15,9 @@ class FlightRepository extends CrudRepository {
       // orderBy: sort
       //||JOIN 
       include:{
-        airplane:true
+        airplane:true,
+        departureAirport:true,
+        arrivalAirport:true
       }
     });
     return response;
