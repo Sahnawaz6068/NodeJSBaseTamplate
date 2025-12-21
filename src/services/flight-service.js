@@ -31,36 +31,38 @@ async function getAllFlight(query) {
     };
   }
   if (query.travellers) {
-    const totalSeats = query.travellers == undefined ? 100 :query.travellers;
+    const totalSeats = query.travellers == undefined ? 100 : query.travellers;
     customFilter.totalSeats = {
       gte: parseInt(totalSeats),
     };
   }
   //Date based Filter
- if (query.tripDate) {
+  if (query.tripDate) {
     // 1.Start Day (00:00:00)
-    const startOfDay = new Date(`${query.tripDate}T00:00:00.000Z`);   
+    const startOfDay = new Date(`${query.tripDate}T00:00:00.000Z`);
     // 2. END day (23:59:59)
     const endOfDay = new Date(`${query.tripDate}T23:59:59.999Z`);
     customFilter.departureTime = {
-        gte: startOfDay,
-        lte: endOfDay
+      gte: startOfDay,
+      lte: endOfDay,
     };
-}
+  }
 
-if(query.sort){
-  const params =  query.sort.split(',');
-  sort = params.map((params)=> params.split('_'));
+  // if (query.sort) {
+  //   const params = query.sort.split(",");
+  //   let sortFilter = params.map((params) => params.split("_"));
 
-  sortFilter = sortFilter
-}
+  //   sortFilter = sortFilter;
+  // }
 
   try {
-    const flights = await FlightRepository.getAllFlight(customFilter,sortFilter);
+    const flights = await FlightRepository.getAllFlight(
+      customFilter
+    );
     return flights;
   } catch (error) {
     throw new Error(
-      "can not fetch data of all the flight",
+      error.message,
       StatusCodes.INTERNAL_SERVER_ERROR
     );
   }

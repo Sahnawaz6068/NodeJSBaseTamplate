@@ -21,6 +21,7 @@ model Airplane {
   id          Int       @id @default(autoincrement())
   modelNumber String
   capacity    Int       @default(200)
+  flight      Flight[]
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 }
@@ -45,6 +46,7 @@ model Flight {
   id                 Int      @id @default(autoincrement())
   flightNumber       String   // varchar(255) NOT NULL
   airplaneId         Int      // int NOT NULL
+  airplane   Airplane @relation(fields: [airplaneId], references: [id])
   departureAirportId String   // varchar(255) NOT NULL
   arrivalAirportId   String   // varchar(255) NOT NULL
   arrivalTime        DateTime // datetime NOT NULL
