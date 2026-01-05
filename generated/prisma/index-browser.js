@@ -138,6 +138,16 @@ exports.Prisma.AirplaneScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.SeatScalarFieldEnum = {
+  id: 'id',
+  airplaneId: 'airplaneId',
+  row: 'row',
+  col: 'col',
+  type: 'type',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.CityScalarFieldEnum = {
   id: 'id',
   name: 'name'
@@ -180,11 +190,17 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-
+exports.SeatType = exports.$Enums.SeatType = {
+  business: 'business',
+  economy: 'economy',
+  premium_economy: 'premium_economy',
+  first_class: 'first_class'
+};
 
 exports.Prisma.ModelName = {
   User: 'User',
   Airplane: 'Airplane',
+  Seat: 'Seat',
   City: 'City',
   Airport: 'Airport',
   Flight: 'Flight'

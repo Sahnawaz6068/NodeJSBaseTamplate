@@ -33,7 +33,11 @@ model Seat {
   airplane    Airplane @relation(fields: [airplaneId], references: [id])
   row         Int
   col         String
-  type        SeatType @default(ECONOMY)
+  type        SeatType @default(economy)
+
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  @@index([airplaneId])
 }
 
 model City {
@@ -81,8 +85,8 @@ model Flight {
 
 
 enum SeatType {
-  ECONOMY
-  PREMIUM_ECONOMY
-  BUSINESS
-  FIRST_CLASS
+  business
+  economy
+  premium_economy
+  first_class
 }

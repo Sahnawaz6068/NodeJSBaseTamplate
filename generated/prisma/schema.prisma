@@ -24,6 +24,21 @@ model Airplane {
   flight      Flight[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  seats       Seat[]
+}
+
+model Seat {
+  id         Int      @id @default(autoincrement())
+  airplaneId Int
+  airplane   Airplane @relation(fields: [airplaneId], references: [id])
+  row        Int
+  col        String
+  type       SeatType @default(economy)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([airplaneId])
 }
 
 model City {
@@ -68,4 +83,11 @@ model Flight {
   @@index([airplaneId])
   @@index([departureAirportId])
   @@index([arrivalAirportId])
+}
+
+enum SeatType {
+  business
+  economy
+  premium_economy
+  first_class
 }
