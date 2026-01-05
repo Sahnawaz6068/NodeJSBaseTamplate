@@ -46,6 +46,8 @@ async function getAllFlight(query) {
       gte: startOfDay,
       lte: endOfDay,
     };
+  }else{
+    
   }
 
   // if (query.sort) {
