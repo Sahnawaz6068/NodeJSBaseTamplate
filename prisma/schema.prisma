@@ -83,6 +83,26 @@ model Flight {
   @@index([arrivalAirportId])
 }
 
+model Booking {
+  id          Int           @id @default(autoincrement())
+  flightId    Int
+  userId      Int
+  status      BookingStatus @default(INITIATED)
+  noOfSeats   Int           @default(1)
+  totalCost   Int
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@map("bookings") // Ensures the table name stays lowercase 'bookings'
+}
+
+// Define the enum to match your database and JS constant
+enum BookingStatus {
+  BOOKED    @map("booked")
+  CANCELLED @map("cancelled")
+  INITIATED @map("initiated")
+  PENDING   @map("pending")
+}
 
 enum SeatType {
   business
