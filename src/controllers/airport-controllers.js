@@ -19,7 +19,6 @@ async function createAirport(req, res) {
   } catch (error) {
     errorResponse.message = error.message;
     errorResponse.statusCode = error.statusCode;
-
     return res.status(error.statusCode).json(errorResponse);
   }
 }

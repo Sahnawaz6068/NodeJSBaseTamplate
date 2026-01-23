@@ -3,6 +3,7 @@ import airplaneController from "./airplane-controllers.js";
 import cityControllers from "./city-controllers.js";
 import airportControllers from "./airport-controllers.js";
 import flightControllers from "./flight-controllers.js";
+import userControllers from "./user-controllers.js";
 
 export default {
   infoController,
@@ -10,4 +11,5 @@ export default {
   cityControllers,
   airportControllers,
   flightControllers,
+  userControllers
 };
