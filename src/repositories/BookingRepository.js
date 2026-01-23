@@ -1,4 +1,4 @@
-import CrudRepository from "./crudrepositories";
+import CrudRepository from "./crudrepositories.js";
 
 class BookingRepository extends CrudRepository{
      constructor (){

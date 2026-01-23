@@ -50,7 +50,7 @@ model Airport {
   id                    Int    @id @default(autoincrement())
   name                  String @unique
   code                  String @unique
-  address               String?            // removed unique unless needed
+  address               String?            
   cityId                Int
   city                  City @relation(fields: [cityId], references: [id], onDelete: Cascade)
   departure             Flight[] @relation("DepartureAirport")
@@ -60,24 +60,23 @@ model Airport {
 
 model Flight {
   id                 Int      @id @default(autoincrement())
-  flightNumber       String   // varchar(255) NOT NULL
-  airplaneId         Int      // int NOT NULL
+  flightNumber       String   
+  airplaneId         Int      
   airplane           Airplane @relation(fields: [airplaneId], references: [id])
   departureAirport   Airport @relation("DepartureAirport",fields: [departureAirportId],references: [code])
   arrivalAirport     Airport @relation( "ArrivalAirport", fields: [arrivalAirportId],references: [code])
   
-  departureAirportId String   // varchar(255) NOT NULL
-  arrivalAirportId   String   // varchar(255) NOT NULL
-  arrivalTime        DateTime // datetime NOT NULL
-  departureTime      DateTime // datetime NOT NULL
-  price              Int      // int NOT NULL
-  boardingGate       String?  // varchar(255) NULL
-  totalSeats         Int      // int NOT NULL
+  departureAirportId String   
+  arrivalAirportId   String   
+  arrivalTime        DateTime 
+  departureTime      DateTime 
+  price              Int      
+  boardingGate       String?  
+  totalSeats         Int      
 
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt
 
-  /// Optional indexes to reflect MySQL `MUL` keys (add if helpful)
   @@index([airplaneId])
   @@index([departureAirportId])
   @@index([arrivalAirportId])
@@ -93,10 +92,9 @@ model Booking {
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
 
-  @@map("bookings") // Ensures the table name stays lowercase 'bookings'
+  @@map("bookings") 
 }
 
-// Define the enum to match your database and JS constant
 enum BookingStatus {
   BOOKED    @map("booked")
   CANCELLED @map("cancelled")

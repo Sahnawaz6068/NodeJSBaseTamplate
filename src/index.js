@@ -7,10 +7,10 @@ const app=express();
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
-//Route
+//Route          
 app.use("/api",apiRoutes)
 
 app.listen(serverConfig.PORT,()=>{
     console.log(`sucessfully started the server on the ${serverConfig.PORT}`);
     logger.info("Sucessfuly started the server","root",{});
-})
+});         
