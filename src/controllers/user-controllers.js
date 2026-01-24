@@ -6,7 +6,7 @@ const sucessResponse = reqResponse.SucessResponse;
 const errorResponse  = reqResponse.ErrorResponse;
 
 //post : /signup
-async function createUser(req,res){
+async function signup(req,res){
     try{
         const user = await userService.createUser({
             userName : req.body.userName,
@@ -26,6 +26,26 @@ async function createUser(req,res){
     }
 }
 
+//post:signin
+async function signin(req,res){
+    try{
+        const token = await userService.signin({
+            email: req.body.email,
+            password: req.body.password,
+      })
+      sucessResponse.data = token;
+      sucessResponse.message = "user signin sucessfully";
+      
+      return res.status(StatusCodes.OK).json(sucessResponse)
+    }catch(error){
+        errorResponse.message =  error.message;
+        errorResponse.error = error
+        
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(errorResponse)
+    }
+}
+
+
 export default {
-    createUser
+    signup,signin
 }
