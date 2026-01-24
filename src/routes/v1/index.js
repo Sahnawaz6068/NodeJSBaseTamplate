@@ -11,8 +11,8 @@ const router=express.Router();
 router.use('/airplanes',airplaneRoute);
 router.use('/cities',cityRoute);
 router.use('/airports' ,airportRoute);
-router.use('/flights', flightRoute)
-router.use('/auth',userRoute)
+router.use('/flights', flightRoute);
+router.use('/auth',userRoute);
 
 router.get('/info',controller.infoController);
 
