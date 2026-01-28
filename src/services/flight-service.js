@@ -16,18 +16,16 @@ async function createFlight(data) {
 async function getAllFlight(query) {
   let customFilter = {};
   let sort = [];
-  //F1: trips =MUM-DEL
   if (query.trips) {
     const [departureAirportId, arrivalAirportId] = query.trips.split("-");
     customFilter.departureAirportId = departureAirportId;
     customFilter.arrivalAirportId = arrivalAirportId;
-    // TODO : Add a Check that they are not same
   }
   if (query.price) {
     const [minimumPrice, maximumPrice] = query.price.split("-");
     customFilter.price = {
-      gte: parseInt(minimumPrice), // Greater than or equal to min
-      lte: parseInt(maximumPrice == undefined ? 20000 : maximumPrice), // Less than or equal to max
+      gte: parseInt(minimumPrice), 
+      lte: parseInt(maximumPrice == undefined ? 20000 : maximumPrice), 
     };
   }
   if (query.travellers) {
@@ -36,11 +34,10 @@ async function getAllFlight(query) {
       gte: parseInt(totalSeats),
     };
   }
-  //Date based Filter
+
   if (query.tripDate) {
-    // 1.Start Day (00:00:00)
+ 
     const startOfDay = new Date(`${query.tripDate}T00:00:00.000Z`);
-    // 2. END day (23:59:59)
     const endOfDay = new Date(`${query.tripDate}T23:59:59.999Z`);
     customFilter.departureTime = {
       gte: startOfDay,
