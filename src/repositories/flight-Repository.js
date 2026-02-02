@@ -8,12 +8,10 @@ class FlightRepository extends CrudRepository {
   constructor() {
     super("flight");
   }
-//Filter 
+
   async getAllFlight(filter) {
     const response = await prisma.flight.findMany({
       where: filter,
-      // orderBy: sort
-      //||JOIN 
       include:{
         airplane:true,
         departureAirport:true,

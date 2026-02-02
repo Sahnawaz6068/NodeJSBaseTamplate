@@ -8,7 +8,7 @@ class UserRepository extends CrudRepository{
      constructor (){
         super("user")
      }
-
+ 
      async getUserByEmail(email){
       const user = await prisma.user.findUnique({
          where:{

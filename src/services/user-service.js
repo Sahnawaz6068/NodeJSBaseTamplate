@@ -25,7 +25,7 @@ async function signin(data) {
             throw new AppError("No User Find for given email",StatusCodes.NOT_FOUND)
         }
         const passwordMatch =await bcrypt.compare(data.password,user.password);
-        // console.log(passwordMatch);
+        // console.log(passwordMatch); 
         if(!passwordMatch){
             throw new AppError("Invalid Credential",StatusCodes.BAD_REQUEST)
         }

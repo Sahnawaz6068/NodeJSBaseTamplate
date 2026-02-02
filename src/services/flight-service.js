@@ -43,16 +43,8 @@ async function getAllFlight(query) {
       gte: startOfDay,
       lte: endOfDay,
     };
-  }else{
-    
   }
-
-  // if (query.sort) {
-  //   const params = query.sort.split(",");
-  //   let sortFilter = params.map((params) => params.split("_"));
-
-  //   sortFilter = sortFilter;
-  // }
+//Just working above code ?
 
   try {
     const flights = await FlightRepository.getAllFlight(

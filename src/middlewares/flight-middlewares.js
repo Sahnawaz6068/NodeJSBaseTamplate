@@ -4,8 +4,6 @@ import reqResponses from "../utils/common/index.js";
 function validateCreateFlight(req, res, next) {
     const ErrorResponse = { ...reqResponses.ErrorResponse };
 
-    // List of required fields based on your Prisma Schema
-    //'boardingGate' is excluded because it is optional (?)
     const requiredFields = [
         'flightNumber',
         'airplaneId',
@@ -29,7 +27,6 @@ function validateCreateFlight(req, res, next) {
         }
     }
 
-    // Optional: Logic to check if arrival time is after departure time
     if (new Date(req.body.arrivalTime) <= new Date(req.body.departureTime)) {
         ErrorResponse.error = StatusCodes.BAD_REQUEST;
         ErrorResponse.message = 'Arrival time must be after departure time';

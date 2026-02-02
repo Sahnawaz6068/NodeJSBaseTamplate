@@ -7,9 +7,9 @@ import rateLimit from 'express-rate-limit';
 const app=express();
 
 const limiter = rateLimit({
-    windowMs: 2*60*1000, //2 minutes
-    max: 3, //Limit each IP to 2 request per 'window' (here, per 15 minutes)
-})
+    windowMs: 2*60*1000, 
+    max: 20, 
+}) 
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
