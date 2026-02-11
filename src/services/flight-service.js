@@ -24,8 +24,8 @@ async function getAllFlight(query) {
   if (query.price) {
     const [minimumPrice, maximumPrice] = query.price.split("-");
     customFilter.price = {
-      gte: parseInt(minimumPrice), 
-      lte: parseInt(maximumPrice == undefined ? 20000 : maximumPrice), 
+      gte: parseInt(minimumPrice),
+      lte: parseInt(maximumPrice == undefined ? 20000 : maximumPrice),
     };
   }
   if (query.travellers) {
@@ -36,7 +36,6 @@ async function getAllFlight(query) {
   }
 
   if (query.tripDate) {
- 
     const startOfDay = new Date(`${query.tripDate}T00:00:00.000Z`);
     const endOfDay = new Date(`${query.tripDate}T23:59:59.999Z`);
     customFilter.departureTime = {
@@ -44,22 +43,33 @@ async function getAllFlight(query) {
       lte: endOfDay,
     };
   }
-//Just working above code ?
+  //Just working above code ?
 
   try {
-    const flights = await FlightRepository.getAllFlight(
-      customFilter
-    );
+    const flights = await FlightRepository.getAllFlight(customFilter);
     return flights;
   } catch (error) {
-    throw new Error(
-      error.message,
-      StatusCodes.INTERNAL_SERVER_ERROR
-    );
+    throw new Error(error.message, StatusCodes.INTERNAL_SERVER_ERROR);
+  }
+}
+
+async function getFlight(id) {
+  try {
+    const flight = await FlightRepository.read(parseInt(id));
+    return flight;
+  } catch (error) {
+    if (error.statusCode == StatusCodes.NOT_FOUND) {
+      throw new AppError(
+        `The flight you requested is not present`,
+        error.statusCode,
+      );
+    }
+    throw new AppError(`something wrong during fetching flight detail`)
   }
 }
 
 export default {
   createFlight,
   getAllFlight,
+  getFlight
 };

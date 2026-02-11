@@ -60,7 +60,6 @@ async function deleteCityById(id) {
 
     return response;
   } catch (error) {
-    
     throw new AppError(
       error.message,
       StatusCodes.INTERNAL_SERVER_ERROR

@@ -39,28 +39,44 @@ async function createFlight(req, res) {
     return res.status(StatusCodes.CREATED).json(sucessResponse);
   } catch (error) {
     const status = error.statusCode || StatusCodes.INTERNAL_SERVER_ERROR;
-    
+
     errorResponse.message = error.message;
     errorResponse.error = error;
-    
+
     return res.status(status).json(errorResponse);
   }
 }
 
-async function getAllFlight(req,res) {
+async function getAllFlight(req, res) {
   try {
     const flight = await flightService.getAllFlight(req.query);
     sucessResponse.data = flight;
-    return res.status(StatusCodes.OK).json(flight)
+    return res.status(StatusCodes.OK).json(flight);
   } catch (error) {
     errorResponse.message = error.message;
-    return res
-            .status(StatusCodes.INTERNAL_SERVER_ERROR)
-            .json(errorResponse)
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(errorResponse);
+  }
+}
+
+async function getFlight(req, res) {
+  const flightId = req.params.id;
+  try {
+    const flight = await flightService.getFlight(flightId);
+    sucessResponse.data = flight;
+    sucessResponse.message = `this is your flight for flight id ${flightId}`;
+    return res.status(StatusCodes.OK).json(sucessResponse);
+  } catch (error) {
+    const status = error.statusCode || StatusCodes.INTERNAL_SERVER_ERROR;
+    errorResponse.message = error.message;
+    errorResponse.statusCode = status;
+    errorResponse.error = error;
+
+    return res.status(status).json(errorResponse);
   }
 }
 
 export default {
   createFlight,
-  getAllFlight
+  getAllFlight,
+  getFlight
 };

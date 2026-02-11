@@ -50,8 +50,16 @@ async function deleteAirport(id) {
 }
 
 async function updateAirport(id, data) {
+  const airportId =  parseInt(id);
   try {
-  } catch (error) {}
+    const response = await airportRepository.update(airportId,data);
+    return response
+  } catch (error) {
+    if(error.statusCode){
+      throw new AppError(`The airport with this id ${airportId} is not present`,StatusCodes.NOT_FOUND);
+    }
+    throw  new AppError("Something wrong with server", StatusCodes.INTERNAL_SERVER_ERROR)
+  }
 }
 
 export default {

@@ -8,5 +8,7 @@ router.post('/',middlewares.flightMiddleware,controllers.flightControllers.creat
 //api/v1/flights?trips=MUM-DEL GET
 router.get('/',controllers.flightControllers.getAllFlight);
 
+router.get('/:id',controllers.flightControllers.getFlight);
+
 
 export default router;
