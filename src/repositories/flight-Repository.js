@@ -20,6 +20,18 @@ class FlightRepository extends CrudRepository {
     });
     return response;
   }
+
+  // On booking completed, seat should be decreased
+  async updateRemainingSeats(flightId, seats, dec = true) {
+    return await prisma.flight.update({
+      where: { id: flightId },
+      data: {
+        totalSeats: dec
+          ? { decrement: seats }
+          : { increment: seats },
+      },
+    });
+  }
 }
 
 export default FlightRepository;

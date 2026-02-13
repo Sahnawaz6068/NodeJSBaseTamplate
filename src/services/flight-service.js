@@ -64,12 +64,22 @@ async function getFlight(id) {
         error.statusCode,
       );
     }
-    throw new AppError(`something wrong during fetching flight detail`)
+    throw new AppError(`something wrong during fetching flight details`)
+  }
+}
+
+async function updateSeats(data){
+  try {
+    const response = await FlightRepository.updateRemainingSeats(data.flightId,data.seats,data.dec);
+    return response;
+  } catch (error) {
+    throw new AppError('Can not update data of the flight',StatusCodes.INTERNAL_SERVER_ERROR);
   }
 }
 
 export default {
   createFlight,
   getAllFlight,
-  getFlight
+  getFlight,
+  updateSeats
 };

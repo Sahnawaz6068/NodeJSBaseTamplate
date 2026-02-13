@@ -75,8 +75,30 @@ async function getFlight(req, res) {
   }
 }
 
+async function updateSeats(req, res) {
+  try {
+    const respose = await flightService.updateSeats({
+      flightId: req.body.flightId,
+      seats: req.body.seats,
+      dec: req.body.dec,
+    });
+
+    sucessResponse.data = respose;
+    sucessResponse.message = `SEAT IS UPDATED`;
+    return res.status(StatusCodes.OK).json(sucessResponse);
+  } catch (error) {
+    const status = error.statusCode || StatusCodes.INTERNAL_SERVER_ERROR;
+    errorResponse.message = error.message;
+    errorResponse.statusCode = status;
+    errorResponse.error = error;
+
+    return res.status(status).json(errorResponse);
+  }
+}
+
 export default {
   createFlight,
   getAllFlight,
-  getFlight
+  getFlight,
+  updateSeats
 };
